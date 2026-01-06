@@ -1,0 +1,14 @@
+<button 
+  mat-icon-button 
+  [matBadge]="unreadCount()" 
+  matBadgeColor="warn"
+  matBadgeSize="small"
+  [matBadgeHidden]="!hasUnread()"
+  [disabled]="notificationStore.isLoading()"
+  aria-label="Benachrichtigungen">
+  @if (notificationStore.isLoading()) {
+    <mat-icon class="animate-spin">refresh</mat-icon>
+  } @else {
+    <mat-icon>notifications</mat-icon>
+  }
+</button>

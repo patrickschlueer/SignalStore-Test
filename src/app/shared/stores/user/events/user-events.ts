@@ -1,0 +1,14 @@
+import { type } from '@ngrx/signals';
+import { eventGroup } from '@ngrx/signals/events';
+import { User } from '../../../models/user.interface';
+
+export const userEvents = eventGroup({
+  source: 'User',
+  events: {
+    load: type<void>(),
+    loadedSuccess: type<User>(),
+    set: type<User>(),
+    updated: type<Partial<User>>(),
+    cleared: type<void>()
+  },
+});

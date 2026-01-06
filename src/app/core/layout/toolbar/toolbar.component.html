@@ -1,0 +1,26 @@
+<div class="toolbar-wrapper">
+  <mat-toolbar color="primary" class="flex items-center gap-2">
+    <button mat-icon-button (click)="layoutDispatcher.navigationSidenavToggled()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    
+    @if (!userStore.isLoading()) {
+      <span class="text-lg font-medium flex-1">Hallo {{userStore.fullName()}}</span>
+    } @else {
+      <span class="flex-1 flex items-center gap-2">
+        <span class="text-lg font-medium">Hallo</span>
+        <div class="h-6 w-32 bg-gray-300 rounded animate-pulse"></div>
+      </span>
+    }
+    
+    <div (click)="layoutDispatcher.notificationSidenavToggled()">
+      <app-notification />
+    </div>
+    
+    @if (!userStore.isLoading()) {
+      <app-avatar [name]="userStore.fullName()" />
+    } @else {
+      <div class="w-10 h-10 rounded-full bg-gray-300 animate-pulse"></div>
+    }
+  </mat-toolbar>
+</div>

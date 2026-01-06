@@ -1,0 +1,34 @@
+<div class="h-full flex flex-col">
+  <!-- Toolbar durchgehend oben -->
+  <app-toolbar />
+  
+  <!-- Sidenav Container darunter -->
+  <mat-sidenav-container class="flex-1">
+    <!-- Linke Navigation -->
+    <mat-sidenav 
+      [opened]="layoutStore.navigationSidenavOpen()" 
+      (closed)="layoutDispatcher.navigationSidenavClosed()"
+      mode="over" 
+      position="start"
+      class="w-64 bg-white border-r border-gray-200">
+      <app-navigation-sidenav-content />
+    </mat-sidenav>
+
+    <!-- Rechter Notification Sidenav -->
+    <mat-sidenav 
+      [opened]="layoutStore.notificationSidenavOpen()" 
+      (closed)="layoutDispatcher.notificationSidenavClosed()"
+      mode="over" 
+      position="end"
+      class="w-80">
+      <app-notification-sidenav-content (closed)="layoutDispatcher.notificationSidenavClosed()" />
+    </mat-sidenav>
+
+    <!-- Content Bereich -->
+    <mat-sidenav-content class="bg-gray-50">
+      <div class="p-6">
+        <router-outlet />
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

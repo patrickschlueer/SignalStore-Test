@@ -1,0 +1,50 @@
+:host {
+  display: inline-block;
+  position: relative;
+}
+
+/* Material Badge Fix - Ensure proper rendering */
+::ng-deep .mat-badge-content {
+  font-weight: 600;
+  font-size: 10px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+::ng-deep .mat-badge-small .mat-badge-content {
+  font-size: 9px!important;
+  width: 16px!important;
+  height: 16px!important;
+  line-height: 16px!important;
+  min-width: 16px!important;
+}
+
+::ng-deep .mat-badge-warn .mat-badge-content {
+  background: #f44336 !important;
+  color: white !important;
+}
+
+::ng-deep .mat-badge-overlap.mat-badge-after .mat-badge-content {
+  left: 30px;
+}
+
+::ng-deep .mat-badge-overlap.mat-badge-above .mat-badge-content {
+  top: 5px;
+}
+
+/* Loading animation */
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
