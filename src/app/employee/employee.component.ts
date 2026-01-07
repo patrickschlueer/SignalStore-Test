@@ -3,11 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-employee',
   imports: [],
-  template: `
-    <div class="p-6">
-      <h1>Einsätze</h1>
-      <p>Hier entsteht die Einsätze-Funktionalität...</p>
-    </div>
-  `
+  templateUrl: './employee.component.html',
+  styleUrl: './employee.component.scss'
 })
 export class EmployeeComponent {}

@@ -14,7 +14,7 @@ import { NotificationStore } from '../../stores/notification/notification.store'
     MatBadgeModule
   ],
   templateUrl: './notification.component.html',
-  styleUrl: './notification.component.css'
+  styleUrl: './notification.component.scss'
 })
 export class NotificationComponent implements OnInit {
   protected readonly notificationDispatcher = injectDispatch(notificationEvents);

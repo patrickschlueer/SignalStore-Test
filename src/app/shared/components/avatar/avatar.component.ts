@@ -5,7 +5,7 @@ import { AvatarModule } from 'ngx-avatars';
   selector: 'app-avatar',
   imports: [AvatarModule],
   templateUrl: './avatar.component.html',
-  styleUrl: './avatar.component.css'
+  styleUrl: './avatar.component.scss'
 })
 export class AvatarComponent {
   name = input<string>('User');
