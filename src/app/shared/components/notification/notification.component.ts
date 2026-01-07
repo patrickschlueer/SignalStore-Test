@@ -2,9 +2,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
-import { NotificationStore } from '../stores/notification/notification.store';
 import { injectDispatch } from '@ngrx/signals/events';
-import { notificationEvents } from '../stores/notification/events/notification-events';
+import { notificationEvents } from '../../stores/notification/events/notification-events';
+import { NotificationStore } from '../../stores/notification/notification.store';
 
 @Component({
   selector: 'app-notification',

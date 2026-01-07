@@ -1,9 +1,19 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { MessagingComponent } from './messaging/messaging.component';
+import { AcquisitionComponent } from './acquisition/acquisition.component';
+import { SkillComponent } from './skill/skill.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { TimeRecordingComponent } from './time-recording/time-recording.component';
+import { InfrastructureComponent } from './infrastructure/infrastructure.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'messaging', component: MessagingComponent }
+  { path: 'acquisition', component: AcquisitionComponent },
+  { path: 'skill', component: SkillComponent },
+  { path: 'employee', component: EmployeeComponent },
+  { path: 'calendar', component: CalendarComponent },
+  { path: 'time-recording', component: TimeRecordingComponent },
+  { path: 'infrastructure', component: InfrastructureComponent }
 ];

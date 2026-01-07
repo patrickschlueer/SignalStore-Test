@@ -42,3 +42,9 @@ export function closeAllReducer() {
     notificationSidenavOpen: false
   };
 }
+
+export function toggleDarkModeReducer(_event: any, state: LayoutState) {
+  return {
+    darkMode: !state.darkMode
+  };
+}

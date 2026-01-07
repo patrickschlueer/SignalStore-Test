@@ -1,0 +1,74 @@
+// Angular Material & Theme
+@use '@angular/material' as mat;
+@use './assets/theme-colors' as point-theme-colors;
+// Tailwind CSS integration
+@use "tailwindcss";
+
+// Include Material core styles (only once in your app)
+@include mat.core();
+
+// Define the POiNT Light Theme
+$point-light-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: point-theme-colors.$primary-palette,
+    tertiary: point-theme-colors.$tertiary-palette,
+  ),
+  typography: (
+    brand-family: 'Roboto, "Helvetica Neue", sans-serif',
+    plain-family: 'Roboto, "Helvetica Neue", sans-serif',
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+// Define the POiNT Dark Theme
+$point-dark-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: point-theme-colors.$primary-palette,
+    tertiary: point-theme-colors.$tertiary-palette,
+  ),
+  typography: (
+    brand-family: 'Roboto, "Helvetica Neue", sans-serif',
+    plain-family: 'Roboto, "Helvetica Neue", sans-serif',
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+// Apply Light Theme by default
+html {
+  @include mat.all-component-themes($point-light-theme);
+  @include mat.system-level-colors($point-light-theme);
+  @include mat.system-level-typography($point-light-theme);
+}
+
+// Apply Dark Theme when dark mode is enabled
+@media (prefers-color-scheme: dark) {
+  html {
+    @include mat.all-component-colors($point-dark-theme);
+    @include mat.system-level-colors($point-dark-theme);
+  }
+}
+
+// Alternative: Manual dark mode toggle with .dark-mode class
+html.dark-mode {
+  @include mat.all-component-colors($point-dark-theme);
+  @include mat.system-level-colors($point-dark-theme);
+  color-scheme: dark;
+}
+
+// Global styles
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+}

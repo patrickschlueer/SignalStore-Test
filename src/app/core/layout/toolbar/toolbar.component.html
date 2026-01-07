@@ -1,7 +1,7 @@
 <div class="toolbar-wrapper">
   <mat-toolbar color="primary" class="flex items-center gap-2">
     <button mat-icon-button (click)="layoutDispatcher.navigationSidenavToggled()">
-      <mat-icon>menu</mat-icon>
+      <span class="material-symbols-outlined">menu</span>
     </button>
     
     @if (!userStore.isLoading()) {
@@ -9,9 +9,17 @@
     } @else {
       <span class="flex-1 flex items-center gap-2">
         <span class="text-lg font-medium">Hallo</span>
-        <div class="h-6 w-32 bg-gray-300 rounded animate-pulse"></div>
+        <div class="h-6 w-32 rounded animate-pulse skeleton-loading"></div>
       </span>
     }
+    
+    <button mat-icon-button (click)="layoutDispatcher.darkModeToggled()" matTooltip="Dark Mode umschalten">
+      @if (layoutStore.darkMode()) {
+        <span class="material-symbols-outlined">light_mode</span>
+      } @else {
+        <span class="material-symbols-outlined">dark_mode</span>
+      }
+    </button>
     
     <div (click)="layoutDispatcher.notificationSidenavToggled()">
       <app-notification />
@@ -20,7 +28,7 @@
     @if (!userStore.isLoading()) {
       <app-avatar [name]="userStore.fullName()" />
     } @else {
-      <div class="w-10 h-10 rounded-full bg-gray-300 animate-pulse"></div>
+      <div class="w-10 h-10 rounded-full animate-pulse skeleton-loading"></div>
     }
   </mat-toolbar>
 </div>

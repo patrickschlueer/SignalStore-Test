@@ -7,7 +7,7 @@ import { INITIAL_NOTIFICATIONS } from '../../../mocks/notification.mock';
 
 export function createNotificationHandlers() {
   const events = inject(Events);
-  
+
   return {
     // Async Event Handler: Simuliert API Call mit 1000ms Verzögerung
     loadNotifications: events.on(notificationEvents.load).pipe(

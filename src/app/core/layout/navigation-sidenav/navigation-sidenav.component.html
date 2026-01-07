@@ -2,15 +2,15 @@
   @if (navigationStore.isLoading()) {
     @for (skeleton of [1, 2]; track skeleton) {
       <div class="flex items-center gap-4 px-4 py-3">
-        <div class="w-6 h-6 bg-gray-300 rounded animate-pulse"></div>
-        <div class="h-5 flex-1 bg-gray-300 rounded animate-pulse"></div>
+        <div class="w-6 h-6 rounded animate-pulse skeleton-loading"></div>
+        <div class="h-5 flex-1 rounded animate-pulse skeleton-loading"></div>
       </div>
     }
   } @else {
     @for (nav of navigationStore.navigationEntities(); track nav.id) {
       @if (nav.visible) {
-        <a mat-list-item [routerLink]="nav.route" routerLinkActive="bg-primary/10">
-          <mat-icon matListItemIcon>{{ nav.icon }}</mat-icon>
+        <a mat-list-item [routerLink]="nav.route" routerLinkActive="active-nav-item">
+          <span class="material-symbols-outlined" matListItemIcon>{{ nav.icon }}</span>
           <span matListItemTitle>{{ nav.label }}</span>
         </a>
       }

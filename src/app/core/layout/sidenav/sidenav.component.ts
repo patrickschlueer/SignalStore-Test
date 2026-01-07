@@ -18,7 +18,7 @@ import { layoutEvents } from '../../stores/layout/events/layout-events';
     NotificationSidenavContentComponent
   ],
   templateUrl: './sidenav.component.html',
-  styleUrl: './sidenav.component.css'
+  styleUrl: './sidenav.component.scss'
 })
 export class SidenavComponent {
   protected readonly layoutStore = inject(LayoutStore);

@@ -2,7 +2,7 @@ import { Component, output, inject } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { AvatarComponent } from '../../../shared/avatar/avatar.component';
+import { AvatarComponent } from '../../../shared/components/avatar/avatar.component';
 import { NotificationStore } from '../../../shared/stores/notification/notification.store';
 import { injectDispatch } from '@ngrx/signals/events';
 import { notificationEvents } from '../../../shared/stores/notification/events/notification-events';

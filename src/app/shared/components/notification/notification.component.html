@@ -7,8 +7,8 @@
   [disabled]="notificationStore.isLoading()"
   aria-label="Benachrichtigungen">
   @if (notificationStore.isLoading()) {
-    <mat-icon class="animate-spin">refresh</mat-icon>
+    <span class="material-symbols-outlined animate-spin">refresh</span>
   } @else {
-    <mat-icon>notifications</mat-icon>
+    <span class="material-symbols-outlined">notifications</span>
   }
 </button>

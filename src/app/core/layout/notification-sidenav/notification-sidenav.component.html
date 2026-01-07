@@ -1,6 +1,6 @@
 <div class="flex flex-col h-full">
   <!-- Header -->
-  <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200">
+  <div class="flex items-center justify-between px-4 py-3 notification-header">
     <h2 class="text-lg font-semibold">Benachrichtigungen</h2>
     <div class="flex gap-1">
       <button 
@@ -8,13 +8,13 @@
         (click)="notificationDispatcher.added()"
         matTooltip="Benachrichtigung hinzufügen"
         aria-label="Hinzufügen">
-        <mat-icon>add</mat-icon>
+        <span class="material-symbols-outlined">add</span>
       </button>
       <button 
         mat-icon-button 
         (click)="layoutDispatcher.notificationSidenavClosed()" 
         aria-label="Schließen">
-        <mat-icon>close</mat-icon>
+        <span class="material-symbols-outlined">close</span>
       </button>
     </div>
   </div>
@@ -22,15 +22,15 @@
   <!-- Content -->
   <div class="flex-1 overflow-y-auto">
     @if (notificationStore.sortedNotifications().length === 0) {
-      <div class="text-center text-gray-500 py-8 text-sm">
+      <div class="text-center py-8 text-sm empty-state">
         Keine Benachrichtigungen
       </div>
     } @else {
       <div class="flex flex-col">
         @for (notification of notificationStore.sortedNotifications(); track notification.id) {
           <div 
-            [class.bg-blue-50]="!notification.read"
-            class="flex items-start gap-3 px-4 py-2.5 hover:bg-gray-50 cursor-pointer border-b border-gray-100">
+            [class.unread]="!notification.read"
+            class="notification-item flex items-start gap-3 px-4 py-2.5 cursor-pointer">
             <!-- Avatar -->
             <div class="flex-shrink-0 mt-0.5">
               <app-avatar 
@@ -44,14 +44,14 @@
                 <div class="font-medium text-sm flex items-center gap-1.5 leading-tight">
                   <span class="truncate">{{ notification.title }}</span>
                   @if (!notification.read) {
-                    <span class="w-1.5 h-1.5 bg-blue-500 rounded-full flex-shrink-0"></span>
+                    <span class="w-1.5 h-1.5 rounded-full flex-shrink-0 unread-indicator"></span>
                   }
                 </div>
               </div>
-              <div class="text-xs text-gray-600 line-clamp-2 mt-0.5 leading-snug">
+              <div class="text-xs line-clamp-2 mt-0.5 leading-snug notification-message">
                 {{ notification.message }}
               </div>
-              <div class="text-xs text-gray-400 mt-1">
+              <div class="text-xs mt-1 notification-time">
                 {{ getRelativeTime(notification.timestamp) }}
               </div>
             </div>
@@ -64,7 +64,7 @@
                   (click)="notificationDispatcher.read(notification.id); $event.stopPropagation()"
                   matTooltip="Als gelesen markieren"
                   class="notification-action-btn">
-                  <mat-icon>done</mat-icon>
+                  <span class="material-symbols-outlined">done</span>
                 </button>
               } @else {
                 <button 
@@ -72,7 +72,7 @@
                   (click)="notificationDispatcher.unread(notification.id); $event.stopPropagation()"
                   matTooltip="Als ungelesen markieren"
                   class="notification-action-btn">
-                  <mat-icon>markunread</mat-icon>
+                  <span class="material-symbols-outlined">markunread</span>
                 </button>
               }
               <button 
@@ -80,7 +80,7 @@
                 (click)="notificationDispatcher.removed(notification.id); $event.stopPropagation()"
                 matTooltip="Löschen"
                 class="notification-action-btn">
-                <mat-icon>delete</mat-icon>
+                <span class="material-symbols-outlined">delete</span>
               </button>
             </div>
           </div>

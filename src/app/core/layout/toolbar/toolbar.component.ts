@@ -2,27 +2,31 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { NotificationComponent } from '../../../shared/notification/notification.component';
-import { AvatarComponent } from '../../../shared/avatar/avatar.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { AvatarComponent } from '../../../shared/components/avatar/avatar.component';
 import { injectDispatch } from '@ngrx/signals/events';
 import { layoutEvents } from '../../stores/layout/events/layout-events';
+import { LayoutStore } from '../../stores/layout/layout.store';
 import { UserStore } from '../../../shared/stores/user/user.store';
 import { userEvents } from '../../../shared/stores/user/events/user-events';
+import { NotificationComponent } from '../../../shared/components/notification/notification.component';
 
 @Component({
   selector: 'app-toolbar',
   imports: [
     MatToolbarModule, 
     MatButtonModule, 
-    MatIconModule, 
+    MatIconModule,
+    MatTooltipModule,
     NotificationComponent, 
     AvatarComponent
   ],
   templateUrl: './toolbar.component.html',
-  styleUrl: './toolbar.component.css'
+  styleUrl: './toolbar.component.scss'
 })
 export class ToolbarComponent implements OnInit {
   protected readonly userStore = inject(UserStore);
+  protected readonly layoutStore = inject(LayoutStore);
   protected readonly layoutDispatcher = injectDispatch(layoutEvents);
   private readonly userDispatcher = injectDispatch(userEvents);
 

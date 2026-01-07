@@ -1,1 +1,10 @@
 /* Navigation Sidenav specific styles */
+
+.skeleton-loading {
+  background-color: var(--mat-sys-surface-variant);
+}
+
+.active-nav-item {
+  background-color: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-primary-container);
+}
