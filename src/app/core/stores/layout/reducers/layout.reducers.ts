@@ -18,31 +18,6 @@ export function closeNavigationSidenavReducer() {
   };
 }
 
-export function toggleNotificationSidenavReducer(_event: any, state: LayoutState) {
-  return {
-    notificationSidenavOpen: !state.notificationSidenavOpen
-  };
-}
-
-export function openNotificationSidenavReducer() {
-  return {
-    notificationSidenavOpen: true
-  };
-}
-
-export function closeNotificationSidenavReducer() {
-  return {
-    notificationSidenavOpen: false
-  };
-}
-
-export function closeAllReducer() {
-  return {
-    navigationSidenavOpen: false,
-    notificationSidenavOpen: false
-  };
-}
-
 export function toggleDarkModeReducer(_event: any, state: LayoutState) {
   return {
     darkMode: !state.darkMode

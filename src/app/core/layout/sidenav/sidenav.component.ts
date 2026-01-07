@@ -3,7 +3,6 @@ import { RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
 import { NavigationSidenavContentComponent } from '../navigation-sidenav/navigation-sidenav.component';
-import { NotificationSidenavContentComponent } from '../notification-sidenav/notification-sidenav.component';
 import { LayoutStore } from '../../stores/layout/layout.store';
 import { injectDispatch } from '@ngrx/signals/events';
 import { layoutEvents } from '../../stores/layout/events/layout-events';
@@ -15,7 +14,6 @@ import { layoutEvents } from '../../stores/layout/events/layout-events';
     MatSidenavModule,
     ToolbarComponent,
     NavigationSidenavContentComponent,
-    NotificationSidenavContentComponent
   ],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss'

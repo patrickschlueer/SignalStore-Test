@@ -2,7 +2,6 @@
   <!-- Toolbar durchgehend oben -->
   <app-toolbar />
   
-  <!-- Sidenav Container darunter -->
   <mat-sidenav-container class="flex-1">
     <!-- Linke Navigation -->
     <mat-sidenav 
@@ -12,16 +11,6 @@
       position="start"
       class="w-52 lg:w-52 md:w-48 sm:w-full no-border-radius navigation-sidenav">
       <app-navigation-sidenav-content />
-    </mat-sidenav>
-
-    <!-- Rechter Notification Sidenav -->
-    <mat-sidenav 
-      [opened]="layoutStore.notificationSidenavOpen()" 
-      (closed)="layoutDispatcher.notificationSidenavClosed()"
-      mode="over" 
-      position="end"
-      class="w-80">
-      <app-notification-sidenav-content (closed)="layoutDispatcher.notificationSidenavClosed()" />
     </mat-sidenav>
 
     <!-- Content Bereich -->

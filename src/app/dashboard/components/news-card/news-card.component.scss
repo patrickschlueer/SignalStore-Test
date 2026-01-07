@@ -1,0 +1,31 @@
+/* News Card */
+.news-card {
+  .news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 16px;
+  }
+  
+  .news-item {
+    display: flex;
+    gap: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--mat-sys-outline-variant);
+    
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+  }
+  
+  .news-date {
+    font-weight: 600;
+    flex-shrink: 0;
+    min-width: 100px;
+  }
+  
+  .news-text {
+    flex: 1;
+  }
+}

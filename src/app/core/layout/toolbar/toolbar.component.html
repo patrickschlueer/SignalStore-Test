@@ -20,10 +20,6 @@
     }
   </button>
   
-  <div (click)="layoutDispatcher.notificationSidenavToggled()">
-    <app-notification />
-  </div>
-  
   @if (!userStore.isLoading()) {
     <app-avatar [name]="userStore.fullName()" />
   } @else {

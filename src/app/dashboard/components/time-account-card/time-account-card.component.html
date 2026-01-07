@@ -1,0 +1,38 @@
+
+<!-- Work Time Account Card -->
+<mat-card class="dashboard-card time-account-card">
+  <mat-card-header>
+    <span class="material-symbols-outlined" mat-card-avatar>schedule</span>
+    <mat-card-title>Stundenkonto</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="time-account">
+      <!-- Monat Ist/Soll -->
+      <div class="time-row">
+        <span class="material-symbols-outlined time-icon">timelapse</span>
+        <span class="time-label">Monat Ist/Soll:</span>
+        <span class="time-value">24.00 / 168.00 Std.</span>
+      </div>
+      
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <mat-progress-bar mode="determinate" [value]="14.29" color="primary"></mat-progress-bar>
+        <span class="progress-label">14.29%</span>
+      </div>
+
+      <!-- Vormonatsaldo -->
+      <div class="time-row">
+        <span class="material-symbols-outlined time-icon">update</span>
+        <span class="time-label">Vormonatsaldo:</span>
+        <span class="time-value">0.00 Std.</span>
+      </div>
+
+      <!-- Verfügbarer Urlaub -->
+      <div class="time-row">
+        <span class="material-symbols-outlined time-icon">flight_takeoff</span>
+        <span class="time-label">Verfügbarer Urlaub:</span>
+        <span class="time-value">34.00 / 35.00 Tage</span>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

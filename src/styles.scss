@@ -74,12 +74,35 @@ body {
 }
 
 .navigation-sidenav {
-  @include mat.sidenav-overrides((
-    container-width: 220px,
-    container-shape: 0px
+    @include mat.sidenav-overrides((
+      container-width: 220px,
+      container-shape: 0px
     ));
+
+    @include mat.list-overrides((
+      active-indicator-shape: 0px
+    ));
+  
+    &.mat-drawer-side {
+      border-right-width: 0px!important;
+    }
+
+    mat-nav-list {
+      padding-top: 0px
+    }
 }
 
 app-toolbar {
   z-index: 2;
+}
+
+.mat-mdc-card-avatar {
+  margin-bottom: 0px!important;
+}
+
+.mat-mdc-card-header {
+    border-top-right-radius: var(--mat-card-elevated-container-shape);
+    border-top-left-radius: var(--mat-card-elevated-container-shape);
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
 }

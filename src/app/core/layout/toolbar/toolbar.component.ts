@@ -9,7 +9,6 @@ import { layoutEvents } from '../../stores/layout/events/layout-events';
 import { LayoutStore } from '../../stores/layout/layout.store';
 import { UserStore } from '../../../shared/stores/user/user.store';
 import { userEvents } from '../../../shared/stores/user/events/user-events';
-import { NotificationComponent } from '../../../shared/components/notification/notification.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -18,7 +17,6 @@ import { NotificationComponent } from '../../../shared/components/notification/n
     MatButtonModule, 
     MatIconModule,
     MatTooltipModule,
-    NotificationComponent, 
     AvatarComponent
   ],
   templateUrl: './toolbar.component.html',

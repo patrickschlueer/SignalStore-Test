@@ -1,0 +1,61 @@
+/* Time Account Card */
+.time-account-card {
+  grid-column: 1 / -1;
+  
+  @media (min-width: 1024px) {
+    grid-column: 1 / 2;
+    grid-row: 2;
+  }
+  
+  .time-account {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 16px;
+  }
+  
+  .time-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .time-icon {
+    font-size: 20px;
+    color: var(--mat-sys-primary);
+    flex-shrink: 0;
+  }
+  
+  .time-label {
+    flex-shrink: 0;
+    min-width: 160px;
+    font-weight: 500;
+  }
+  
+  .time-value {
+    flex: 1;
+    text-align: right;
+    font-weight: 600;
+  }
+  
+  .progress-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 32px;
+    
+    mat-progress-bar {
+      flex: 1;
+      height: 8px;
+      border-radius: 4px;
+    }
+    
+    .progress-label {
+      flex-shrink: 0;
+      min-width: 60px;
+      text-align: right;
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+  }
+}

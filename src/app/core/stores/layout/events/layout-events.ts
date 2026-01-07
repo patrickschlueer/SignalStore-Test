@@ -7,10 +7,6 @@ export const layoutEvents = eventGroup({
     navigationSidenavToggled: type<void>(),
     navigationSidenavOpened: type<void>(),
     navigationSidenavClosed: type<void>(),
-    notificationSidenavToggled: type<void>(),
-    notificationSidenavOpened: type<void>(),
-    notificationSidenavClosed: type<void>(),
-    allClosed: type<void>(),
     darkModeToggled: type<void>(),
   },
 });
