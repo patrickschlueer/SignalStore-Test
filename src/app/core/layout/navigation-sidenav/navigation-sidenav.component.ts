@@ -10,7 +10,7 @@ import { navigationEvents } from '../../../shared/stores/navigation/events/navig
   selector: 'app-navigation-sidenav-content',
   imports: [RouterModule, MatListModule, MatIconModule],
   templateUrl: './navigation-sidenav.component.html',
-  styleUrl: './navigation-sidenav.component.css'
+  styleUrl: './navigation-sidenav.component.scss'
 })
 export class NavigationSidenavContentComponent implements OnInit {
   protected readonly navigationStore = inject(NavigationStore);

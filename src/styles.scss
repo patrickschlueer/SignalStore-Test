@@ -72,3 +72,14 @@ body {
   background: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
 }
+
+.navigation-sidenav {
+  @include mat.sidenav-overrides((
+    container-width: 220px,
+    container-shape: 0px
+    ));
+}
+
+app-toolbar {
+  z-index: 2;
+}

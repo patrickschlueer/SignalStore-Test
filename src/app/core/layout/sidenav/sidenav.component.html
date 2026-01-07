@@ -6,11 +6,11 @@
   <mat-sidenav-container class="flex-1">
     <!-- Linke Navigation -->
     <mat-sidenav 
-      opened
+      [opened]="layoutStore.navigationSidenavOpen()" 
       (closed)="layoutDispatcher.navigationSidenavClosed()"
       mode="side" 
       position="start"
-      class="w-64 no-border-radius">
+      class="w-52 lg:w-52 md:w-48 sm:w-full no-border-radius navigation-sidenav">
       <app-navigation-sidenav-content />
     </mat-sidenav>
 

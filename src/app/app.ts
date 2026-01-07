@@ -5,6 +5,6 @@ import { SidenavComponent } from './core/layout/sidenav/sidenav.component';
   selector: 'app-root',
   imports: [SidenavComponent],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.scss'
 })
 export class App {}

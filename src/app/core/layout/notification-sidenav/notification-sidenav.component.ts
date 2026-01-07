@@ -12,7 +12,7 @@ import { layoutEvents } from '../../stores/layout/events/layout-events';
   selector: 'app-notification-sidenav-content',
   imports: [MatListModule, MatButtonModule, MatIconModule, AvatarComponent],
   templateUrl: './notification-sidenav.component.html',
-  styleUrl: './notification-sidenav.component.css'
+  styleUrl: './notification-sidenav.component.scss'
 })
 export class NotificationSidenavContentComponent {
   readonly notificationDispatcher = injectDispatch(notificationEvents);

@@ -1,17 +1,11 @@
+@use '@angular/material' as mat;
+
+
 :host {
   display: block;
   height: 100%;
 }
 
-// Navigation Sidenav - Box Shadow nach rechts
-:host ::ng-deep .mat-drawer.mat-drawer-start {
-  box-shadow: 4px 0 6px -1px rgba(0, 0, 0, 0.1);
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-}
-
-// Content Bereich
-:host ::ng-deep .mat-drawer-content {
-  background-color: var(--mat-sys-surface-container-low);
-  color: var(--mat-sys-on-surface);
+.navigation-sidenav {
+  box-shadow: var(--mat-app-elevation-shadow-level-3);
 }
