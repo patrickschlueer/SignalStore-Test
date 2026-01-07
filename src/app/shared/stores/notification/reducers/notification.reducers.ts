@@ -41,6 +41,7 @@ export function addNotification(
 }
 
 export function loadInitial() {
+  console.log('hy');
   return {
     isLoading: true
   };

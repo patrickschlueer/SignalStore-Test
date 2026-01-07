@@ -9,4 +9,9 @@ import { MatCardModule } from '@angular/material/card';
   templateUrl: './news-card.component.html',
   styleUrl: './news-card.component.scss'
 })
-export class NewsCardComponent {}
+export class NewsCardComponent {
+
+  constructor() {
+  }
+
+}
