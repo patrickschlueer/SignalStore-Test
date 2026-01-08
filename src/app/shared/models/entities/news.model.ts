@@ -1,4 +1,6 @@
-export interface News {
+import { BaseEntity } from '../base/base-entity.interface';
+
+export interface News extends BaseEntity {
   id: string;
   title: string;
   content: string;
@@ -12,12 +14,4 @@ export interface News {
   isDeleted: boolean;
   createdByUsername?: string;
   updatedByUsername?: string;
-}
-
-export interface NewsDto {
-  id?: string;
-  title: string;
-  content: string;
-  publishedDate: Date;
-  isPublished: boolean;
 }

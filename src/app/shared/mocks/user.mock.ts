@@ -1,4 +1,4 @@
-import { User } from '../models/user.interface';
+import { User } from '../models/entities/user.interface';
 
 export const DEFAULT_USER: User = {
   firstName: 'Patrick',

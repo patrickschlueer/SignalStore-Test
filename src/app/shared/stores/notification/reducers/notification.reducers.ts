@@ -1,7 +1,7 @@
 import { addEntity, removeEntity, updateEntity, setAllEntities } from '@ngrx/signals/entities';
 import { notificationEvents } from '../events/notification-events';
 import { TEST_NOTIFICATIONS } from '../../../mocks/notification.mock';
-import { Notification } from '../../../models/notification.interface';
+import { Notification } from '../../../models/entities/notification.interface';
 
 export function removeNotification(
   event: ReturnType<typeof notificationEvents.removed>,

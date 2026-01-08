@@ -1,4 +1,4 @@
-import { Navigation } from '../models/navigation.interface';
+import { Navigation } from '../models/entities/navigation.interface';
 
 export const INITIAL_NAVIGATION: Navigation[] = [
   {

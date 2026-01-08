@@ -1,5 +1,5 @@
 import { signalStore, withState, withComputed } from '@ngrx/signals';
-import { User } from '../../models/user.interface';
+import { User } from '../../models/entities/user.interface';
 import { on, withReducer, withEventHandlers } from '@ngrx/signals/events';
 import { userEvents } from './events/user-events';
 import { userComputedFactory } from './factories/user-computed.factory';

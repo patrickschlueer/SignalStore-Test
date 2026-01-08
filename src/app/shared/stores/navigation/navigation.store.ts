@@ -1,6 +1,6 @@
 import { signalStore, withState } from '@ngrx/signals';
 import { withEntities, entityConfig } from '@ngrx/signals/entities';
-import { Navigation } from '../../models/navigation.interface';
+import { Navigation } from '../../models/entities/navigation.interface';
 import { on, withReducer, withEventHandlers } from '@ngrx/signals/events';
 import { navigationEvents } from './events/navigation-events';
 import { loadNavigation, loadSuccessReducer } from './reducers/navigation.reducers';

@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { News, NewsDto } from '../models/news.model';
-import { PaginatedResponse } from '../models/pagination.model';
-import { DeltaResponse } from '../models/delta-response.model';
+import { News } from '../models/entities/news.model';
+import { PaginatedResponse } from '../models/helper/pagination.interface';
+import { DeltaResponse } from '../models/helper/delta-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -33,14 +33,14 @@ export class NewsApiService {
   /**
    * Create new news
    */
-  createNews(news: NewsDto): Observable<News> {
+  createNews(news: News): Observable<News> {
     return this.http.post<News>(this.apiUrl, news);
   }
 
   /**
    * Update existing news
    */
-  updateNews(id: string, news: NewsDto): Observable<News> {
+  updateNews(id: string, news: News): Observable<News> {
     return this.http.put<News>(`${this.apiUrl}/${id}`, news);
   }
 

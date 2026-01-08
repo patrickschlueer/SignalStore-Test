@@ -1,6 +1,6 @@
 import { signalStore, withComputed, withState } from '@ngrx/signals';
 import { withEntities, entityConfig } from '@ngrx/signals/entities';
-import { Notification } from '../../models/notification.interface';
+import { Notification } from '../../models/entities/notification.interface';
 import { notificationComputedFactory } from './factories/notification-computed.factory';
 import { on, withReducer, withEventHandlers } from '@ngrx/signals/events';
 import { notificationEvents } from './events/notification-events';

@@ -1,5 +1,5 @@
 import { computed, Signal } from '@angular/core';
-import { User } from '../../../models/user.interface';
+import { User } from '../../../models/entities/user.interface';
 
 export function userComputedFactory(user: Signal<User | null>) {
   return {

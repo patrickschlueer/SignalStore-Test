@@ -1,6 +1,6 @@
 import { type } from '@ngrx/signals';
 import { eventGroup } from '@ngrx/signals/events';
-import { Notification } from '../../../models/notification.interface';
+import { Notification } from '../../../models/entities/notification.interface';
 
 export const notificationEvents = eventGroup({
   source: 'Notification',

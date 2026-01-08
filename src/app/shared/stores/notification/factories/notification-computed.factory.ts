@@ -1,5 +1,5 @@
 import { computed, Signal } from '@angular/core';
-import { Notification } from '../../../models/notification.interface';
+import { Notification } from '../../../models/entities/notification.interface';
 
 export function notificationComputedFactory(notificationEntities: Signal<Notification[]>) {
   return {

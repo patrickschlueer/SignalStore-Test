@@ -1,4 +1,4 @@
-import { Notification } from '../models/notification.interface';
+import { Notification } from '../models/entities/notification.interface';
 
 export const INITIAL_NOTIFICATIONS: Notification[] = [
   {

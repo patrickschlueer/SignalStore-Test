@@ -1,17 +1,27 @@
 import { inject } from '@angular/core';
 import { Events } from '@ngrx/signals/events';
-import { switchMap, map, tap } from 'rxjs';
+import { switchMap, map, tap, from } from 'rxjs';
 import { newsEvents } from '../events/news-events';
-import { NewsApiService } from '../../../services/news-api.service';
+import { NewsSyncManager } from '../../../signaldb/sync-manager/entities/news-sync-manager';
+import { NewsCollection } from '../../../signaldb/collections/entities/news.collection';
 
 export function createNewsEventHandlers() {
   const events = inject(Events);
-  const service = inject(NewsApiService);
+  const syncManager = inject(NewsSyncManager);
+  const newsCollection = inject(NewsCollection);
+  
   return {
-    // Async Event Handler: Simuliert API Call mit 1000ms Verzögerung
+    // Async Event Handler: Lädt News mit SignalDB (Cache-First)
     loadNotifications: events.on(newsEvents.load).pipe(
-      tap(() => console.log('Loading news...')),
-      switchMap(() => service.getNews()),
+      switchMap(() => from(
+        (async () => {
+          // 1. Sync ausführen (Cache-First)
+          await syncManager.sync();
+          
+          // 2. Daten aus Collection lesen
+          return newsCollection.collection.find().fetch();
+        })()
+      )),
       map(result => newsEvents.loadedSuccess(result))
     )
   };

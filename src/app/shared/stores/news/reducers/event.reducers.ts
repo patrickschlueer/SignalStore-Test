@@ -12,7 +12,7 @@ export function loadSuccess(
   config: { collection: string }
 ) {
   return [
-    setAllEntities(event.payload.items, config),
+    setAllEntities(event.payload, config),
     { isLoading: false }
   ];
 }

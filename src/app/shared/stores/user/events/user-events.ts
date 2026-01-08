@@ -1,6 +1,6 @@
 import { type } from '@ngrx/signals';
 import { eventGroup } from '@ngrx/signals/events';
-import { User } from '../../../models/user.interface';
+import { User } from '../../../models/entities/user.interface';
 
 export const userEvents = eventGroup({
   source: 'User',
