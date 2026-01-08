@@ -1,59 +1,117 @@
-# Test
+# POiNT Internal Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
+Modern internal business management platform built with Angular 21 and Material Design 3.
 
-## Development server
+## Overview
 
-To start a local development server, run:
+This application serves as a comprehensive internal system for POiNT, replacing legacy tools with a modern, maintainable solution. Built using cutting-edge Angular patterns and Material Design principles, it provides a seamless user experience for managing business operations.
 
+## Key Features
+
+- **Dashboard** - Overview of news, upcoming events, and work time accounts
+- **Acquisition Management** - Track and manage business opportunities
+- **Skill Management** - Employee skill tracking and development
+- **Employee Management** - Comprehensive HR tools
+- **Calendar** - Event scheduling and management
+- **Time Recording** - Work time tracking and reporting
+- **Infrastructure** - System and resource management
+
+## Technology Stack
+
+### Core Framework
+- **Angular 21** - Latest Angular framework with standalone components
+- **Material Design 3** - Modern UI components with theming support
+- **TypeScript** - Type-safe development
+
+### State Management & Data
+- **NgRx Signals** - Event-driven state management with signals
+- **SignalStore** - Reactive, type-safe store implementation
+- **SignalDB** - Offline-first local database with IndexedDB persistence
+- **Delta Synchronization** - Efficient data syncing (only loads changes after initial sync)
+
+### Styling
+- **Material Design CSS Variables** - Consistent theming across light/dark modes
+- **Tailwind CSS** - Responsive layout utilities
+- **SCSS** - Custom styling when needed
+- **Material Symbols** - Modern icon system
+
+## Architecture Highlights
+
+### Offline-First Approach
+The application uses SignalDB for local-first data persistence, ensuring:
+- Fast initial load times
+- Offline capability
+- Reduced backend load through delta synchronization
+- Automatic conflict resolution
+
+### Event-Driven State Management
+Clean separation of concerns with:
+- Separate files for events, reducers, handlers, and computed factories
+- Type-safe event handling with NgRx Signals
+- Reactive data flow throughout the application
+
+### Design System
+Consistent user experience through:
+- Company branding (primary color: #c31525)
+- Material Design 3 theming
+- Dark mode support
+- Responsive design patterns
+
+## Development
+
+### Prerequisites
+```bash
+Node.js >= 18.x
+npm >= 9.x
+```
+
+### Installation
+```bash
+npm install
+```
+
+### Development Server
 ```bash
 ng serve
 ```
+Navigate to `http://localhost:4200/`. The application will automatically reload on file changes.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
+### Build
 ```bash
 ng build
 ```
+Production builds are optimized and output to the `dist/` directory.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
+### Testing
 ```bash
 ng test
 ```
+Unit tests run with [Vitest](https://vitest.dev/).
 
-## Running end-to-end tests
+## Project Structure
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```
+src/app/
+├── core/              # Core services, guards, interceptors
+│   └── api/           # API service layer
+├── features/          # Feature modules (dashboard, acquisition, etc.)
+├── layout/            # Application layout components
+└── shared/            # Shared resources
+    ├── models/        # Data models and interfaces
+    ├── signaldb/      # SignalDB configuration and sync managers
+    └── stores/        # NgRx Signal stores
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Documentation
+
+Detailed guides for common development tasks:
+
+- [Creating a SignalStore](./resources/signalstore-setup-guide.md) - Step-by-step guide for implementing new stores
+- [SignalDB Integration](./resources/signaldb-integration-guide.md) - How to connect stores to offline-first persistence
 
 ## Additional Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [Angular CLI Documentation](https://angular.dev/tools/cli)
+- [Angular Material Design 3](https://material.angular.io/)
+- [SignalDB Documentation](https://signaldb.js.org/)
+- [NgRx Signals](https://ngrx.io/guide/signals)
