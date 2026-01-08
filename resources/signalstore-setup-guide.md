@@ -293,6 +293,33 @@ Follow the same patterns shown above, replacing "news" with your entity name.
 
 ---
 
+## External Resources
+
+Official NgRx documentation for deeper understanding:
+
+### Core Concepts
+- [NgRx SignalStore Documentation](https://ngrx.io/guide/signals) - Official overview and concepts
+- [SignalStore API Reference](https://ngrx.io/guide/signals/signal-store) - Complete API documentation
+
+### Features Used in This Guide
+- [Signal Store Features](https://ngrx.io/guide/signals/signal-store/store-features) - Overview of all available features
+- [withEntities](https://ngrx.io/guide/signals/signal-store/entity-management) - Entity collection management
+- [withState](https://ngrx.io/guide/signals/signal-store/custom-store-features#withstate) - Adding custom state
+- [withComputed](https://ngrx.io/guide/signals/signal-store/custom-store-features#withcomputed) - Derived state values
+- [withMethods](https://ngrx.io/guide/signals/signal-store/custom-store-features#withmethods) - Adding store methods
+
+### Events & Side Effects
+- [Signal Store Events](https://ngrx.io/guide/signals/signal-store-events) - Event-driven architecture
+- [withEventHandlers](https://ngrx.io/guide/signals/signal-store-events/event-handlers) - Side effect handling
+- [Event Types](https://ngrx.io/guide/signals/signal-store-events/event-types) - Defining type-safe events
+
+### Advanced Topics
+- [Custom Store Features](https://ngrx.io/guide/signals/signal-store/custom-store-features) - Creating reusable features
+- [RxJS Interop](https://ngrx.io/guide/signals/rxjs-integration) - Working with observables
+- [Testing SignalStore](https://ngrx.io/guide/signals/signal-store/testing) - Unit testing strategies
+
+---
+
 ## Next Steps
 
 - [SignalDB Integration Guide](./signaldb-integration-guide.md) - Add offline-first persistence to your store
