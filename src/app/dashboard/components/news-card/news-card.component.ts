@@ -17,7 +17,5 @@ export class NewsCardComponent {
   private readonly newsStore = inject(NewsStore);
   readonly news: Signal<News[]> = this.newsStore.sortedNews;
 
-  constructor() {
-    this.newsStore.loadNews();
-  }
+  // Store lädt automatisch via onInit Hook
 }

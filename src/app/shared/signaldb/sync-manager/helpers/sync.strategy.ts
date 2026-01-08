@@ -84,7 +84,8 @@ export class SyncStrategy {
   }
 
   /**
-   * Apply delta changes to a collection
+   * Apply delta changes to a collection with Upsert logic
+   * Handles edge cases like restored soft-deleted entities
    * 
    * @param collection Collection to apply changes to
    * @param delta Delta response with created, updated, deleted items
@@ -98,12 +99,20 @@ export class SyncStrategy {
       collection.collection.insert(item);
     });
     
-    // Update existing items
+    // Update existing items (with Upsert logic)
     delta.updated.forEach(item => {
-      collection.collection.updateOne(
-        { id: item.id } as any,
-        { $set: item } as any
-      );
+      const exists = collection.collection.findOne({ id: item.id } as any);
+      
+      if (exists) {
+        // Entity exists → Update
+        collection.collection.updateOne(
+          { id: item.id } as any,
+          { $set: item } as any
+        );
+      } else {
+        // Entity doesn't exist (e.g., restored from soft-delete) → Insert
+        collection.collection.insert(item);
+      }
     });
     
     // Remove deleted items

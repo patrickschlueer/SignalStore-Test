@@ -2,6 +2,7 @@ import { Collection } from '@signaldb/core';
 import createIndexedDBAdapter from '@signaldb/indexeddb';
 import { PREFIX_NAME } from '../../core/config/signaldb.config';
 import { BaseEntity } from '../../../models/base/base-entity.interface';
+import angularReactivityAdapter from '@signaldb/angular';
 
 /**
  * Generic Base Collection for SignalDB
@@ -17,7 +18,8 @@ export abstract class BaseCollection<T extends BaseEntity> {
     this.collection = new Collection<T>({
       persistence: createIndexedDBAdapter(collectionName, {
         prefix: PREFIX_NAME
-      })
+      }),
+      reactivity: angularReactivityAdapter
     });
   }
 }

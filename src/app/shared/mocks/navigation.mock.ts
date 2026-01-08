@@ -27,8 +27,8 @@ export const INITIAL_NAVIGATION: Navigation[] = [
   },
   {
     id: '4',
-    label: 'Einsätze',
-    icon: 'work',
+    label: 'Mitarbeiter',
+    icon: 'people',
     route: '/employee',
     order: 4,
     visible: true

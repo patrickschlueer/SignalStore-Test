@@ -106,7 +106,8 @@ src/app/
 
 Detailed guides for common development tasks:
 
-- [Creating a SignalStore](./resources/signalstore-setup-guide.md) - Step-by-step guide for implementing new stores
+- [Creating a SignalStore](./resources/signalstore-setup-guide.md) - Step-by-step guide for implementing new stores (Event-based pattern)
+- [Reactive Collection Pattern](./resources/signalstore-reactive-pattern.md) - Modern pattern for offline-first stores (Recommended)
 - [SignalDB Integration](./resources/signaldb-integration-guide.md) - How to connect stores to offline-first persistence
 
 ## Additional Resources

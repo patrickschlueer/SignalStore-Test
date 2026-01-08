@@ -1,22 +1,20 @@
-import { Injectable, inject } from "@angular/core";
-import { Birthday } from "../../../models/entities/birthday.interface";
-import { BirthdayCollection } from "../../collections/entities/birthday.collection";
-import { BaseSyncManager } from "../base/base-sync-manager";
-import { BirthdayApiService } from "../../../services/birthday-api.service";
+import { Injectable, inject } from '@angular/core';
+import { BaseSyncManager } from '../base/base-sync-manager';
+import { Birthday } from '../../../models/entities/birthday.interface';
+import { BirthdayCollection } from '../../collections/entities/birthday.collection';
+import { BirthdayApiService } from '../../../services/birthday-api.service';
 
 /**
  * Birthday Sync Manager
- * Handles synchronization for Birthday entities
+ * Manages synchronization between backend and IndexedDB for birthdays
  */
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class BirthdaySyncManager extends BaseSyncManager<Birthday> {
   
   constructor() {
     const birthdayCollection = inject(BirthdayCollection);
     const birthdayApiService = inject(BirthdayApiService);
-    super('birthday', birthdayCollection, birthdayApiService);
+    super('birthdays', birthdayCollection, birthdayApiService);
   }
 
   protected getLoadMethod(): string {
@@ -26,9 +24,4 @@ export class BirthdaySyncManager extends BaseSyncManager<Birthday> {
   protected getDeltaMethod(): string {
     return 'getDelta';
   }
-
-  // Optional: Override default params if needed
-  // protected getDefaultParams(): any[] {
-  //   return [1, 50]; // Custom page size
-  // }
 }

@@ -15,8 +15,4 @@ import { DatePipe } from '@angular/common';
 export class BirthdaysCardComponent {
   private readonly birthdayStore = inject(BirthdayStore); 
   protected readonly birthdays = this.birthdayStore.sortedBirthdays;
-
-  constructor() {
-    this.birthdayStore.loadBirthday();
-  }
 }

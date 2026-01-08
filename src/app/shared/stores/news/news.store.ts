@@ -1,38 +1,16 @@
-import { signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
-import { withEntities, entityConfig } from '@ngrx/signals/entities';
-import { newsComputedFactory } from './factories/news-computed.factory';
-import { on, withReducer, withEventHandlers, injectDispatch } from '@ngrx/signals/events';
-import {
-  loadInitial,
-  loadSuccess
-} from './reducers/event.reducers';
-import { createNewsEventHandlers } from './handlers/news.handlers';
-import { News } from '../../models/entities/news.interface';
-import { newsEvents } from './events/news.events';
-
-const newsConfig = entityConfig({
-  entity: {} as News,
-  collection: 'news'
-});
+import { signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
+import { createNewsComputedFactory } from './factories/news-computed.factory';
+import { createNewsMethods } from './methods/news.methods';
+import { initialNewsState } from './state/news.state';
 
 export const NewsStore = signalStore(
   { providedIn: 'root' },
-  withEntities(newsConfig),
-  withState({ isLoading: false }),
-  withComputed(({ newsEntities }) => newsComputedFactory(newsEntities)),
-  withReducer(
-    on(newsEvents.load, loadInitial),
-    on(newsEvents.loadedSuccess, (event) => 
-      loadSuccess(event, newsConfig)
-    )
-  ),
-  withMethods((store) => {
-    const dispatcher = injectDispatch(newsEvents);
-    return {
-      loadNews: () => {
-        dispatcher.load();
-      }
-    };
-  }),
-  withEventHandlers(createNewsEventHandlers)
+  withState(initialNewsState),
+  withComputed(createNewsComputedFactory),
+  withMethods(createNewsMethods),
+  withHooks({
+    onInit(store) {
+      store.loadNews();
+    }
+  })
 );
