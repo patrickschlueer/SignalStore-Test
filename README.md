@@ -4,7 +4,7 @@ Modern internal business management platform built with Angular 21 and Material 
 
 ## Overview
 
-This application serves as a comprehensive internal system for POiNT, replacing legacy tools with a modern, maintainable solution. Built using cutting-edge Angular patterns and Material Design principles, it provides a seamless user experience for managing business operations.
+This application serves as a comprehensive internal system for POINT, replacing legacy tools with a modern, maintainable solution. Built using cutting-edge Angular patterns and Material Design principles, it provides a seamless user experience for managing business operations.
 
 ## Key Features
 
