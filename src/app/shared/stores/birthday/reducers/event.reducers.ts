@@ -1,5 +1,5 @@
 import { setAllEntities } from '@ngrx/signals/entities';
-import { newsEvents } from '../events/news.events';
+import { newsEvents } from '../events/birthday.events';
 
 export function loadInitial() {
   return {

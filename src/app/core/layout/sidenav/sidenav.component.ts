@@ -3,9 +3,9 @@ import { RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
 import { NavigationSidenavContentComponent } from '../navigation-sidenav/navigation-sidenav.component';
-import { LayoutStore } from '../../stores/layout/layout.store';
 import { injectDispatch } from '@ngrx/signals/events';
-import { layoutEvents } from '../../stores/layout/events/layout-events';
+import { layoutEvents } from '../../../shared/stores/layout/events/layout.events';
+import { LayoutStore } from '../../../shared/stores/layout/layout.store';
 
 @Component({
   selector: 'app-sidenav',

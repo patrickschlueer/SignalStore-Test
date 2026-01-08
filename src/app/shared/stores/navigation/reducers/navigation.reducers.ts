@@ -1,5 +1,5 @@
 import { setAllEntities } from '@ngrx/signals/entities';
-import { navigationEvents } from '../events/navigation-events';
+import { navigationEvents } from '../events/navigation.events';
 
 export function loadNavigation() {
   return {

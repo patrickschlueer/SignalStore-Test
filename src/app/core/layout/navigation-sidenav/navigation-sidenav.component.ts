@@ -4,7 +4,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { NavigationStore } from '../../../shared/stores/navigation/navigation.store';
 import { injectDispatch } from '@ngrx/signals/events';
-import { navigationEvents } from '../../../shared/stores/navigation/events/navigation-events';
+import { navigationEvents } from '../../../shared/stores/navigation/events/navigation.events';
 
 @Component({
   selector: 'app-navigation-sidenav-content',

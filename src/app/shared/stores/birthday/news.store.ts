@@ -8,7 +8,7 @@ import {
 } from './reducers/event.reducers';
 import { createNewsEventHandlers } from './handlers/news.handlers';
 import { News } from '../../models/entities/news.model';
-import { newsEvents } from './events/news.events';
+import { newsEvents } from './events/birthday.events';
 
 const newsConfig = entityConfig({
   entity: {} as News,

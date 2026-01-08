@@ -5,10 +5,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AvatarComponent } from '../../../shared/components/avatar/avatar.component';
 import { injectDispatch } from '@ngrx/signals/events';
-import { layoutEvents } from '../../stores/layout/events/layout-events';
-import { LayoutStore } from '../../stores/layout/layout.store';
 import { UserStore } from '../../../shared/stores/user/user.store';
 import { userEvents } from '../../../shared/stores/user/events/user-events';
+import { layoutEvents } from '../../../shared/stores/layout/events/layout.events';
+import { LayoutStore } from '../../../shared/stores/layout/layout.store';
 
 @Component({
   selector: 'app-toolbar',

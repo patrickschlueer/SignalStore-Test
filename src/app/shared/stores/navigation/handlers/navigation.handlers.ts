@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { Events } from '@ngrx/signals/events';
 import { switchMap, map, delay } from 'rxjs';
 import { of } from 'rxjs';
-import { navigationEvents } from '../events/navigation-events';
+import { navigationEvents } from '../events/navigation.events';
 import { INITIAL_NAVIGATION } from '../../../mocks/navigation.mock';
 
 export function createNavigationHandlers() {

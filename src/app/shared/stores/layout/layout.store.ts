@@ -1,6 +1,6 @@
 import { signalStore, withState } from '@ngrx/signals';
 import { on, withReducer, withEventHandlers } from '@ngrx/signals/events';
-import { layoutEvents } from './events/layout-events';
+import { layoutEvents } from './events/layout.events';
 import {
   toggleNavigationSidenavReducer,
   openNavigationSidenavReducer,

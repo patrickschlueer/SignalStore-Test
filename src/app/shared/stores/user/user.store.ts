@@ -3,7 +3,7 @@ import { User } from '../../models/entities/user.interface';
 import { on, withReducer, withEventHandlers } from '@ngrx/signals/events';
 import { userEvents } from './events/user-events';
 import { userComputedFactory } from './factories/user-computed.factory';
-import { clearUser, setUser, updateUser, loadUser, loadedSuccessUser } from './reducer/user.reducer';
+import { loadUser, loadedSuccessUser } from './reducer/user.reducer';
 import { createUserHandlers } from './handlers/user.handlers';
 
 export interface UserState {
@@ -20,10 +20,7 @@ export const UserStore = signalStore(
   withComputed(({ user }) => userComputedFactory(user)),
   withReducer(
     on(userEvents.load, loadUser),
-    on(userEvents.loadedSuccess, loadedSuccessUser),
-    on(userEvents.set, setUser),
-    on(userEvents.updated, updateUser),
-    on(userEvents.cleared, clearUser)
+    on(userEvents.loadedSuccess, loadedSuccessUser)
   ),
   withEventHandlers(createUserHandlers)
 );

@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { Events } from '@ngrx/signals/events';
 import { switchMap, map, tap, from } from 'rxjs';
-import { newsEvents } from '../events/news.events';
+import { newsEvents } from '../events/birthday.events';
 import { NewsSyncManager } from '../../../signaldb/sync-manager/entities/news-sync-manager';
 import { NewsCollection } from '../../../signaldb/collections/entities/news.collection';
 
