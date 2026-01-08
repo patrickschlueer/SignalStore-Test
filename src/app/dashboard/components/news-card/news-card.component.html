@@ -6,18 +6,12 @@
   </mat-card-header>
   <mat-card-content>
     <div class="news-list">
-      <div class="news-item">
-        <span class="news-date">29.09.2025</span>
-        <span class="news-text">Neue Werkstudentin: Shaghayegh (kurz: Shey) Nemati ab 15.10.2025</span>
-      </div>
-      <div class="news-item">
-        <span class="news-date">29.09.2025</span>
-        <span class="news-text">Neuer Kollege: Michael Steinke ab 03.11.2025</span>
-      </div>
-      <div class="news-item">
-        <span class="news-date">29.09.2025</span>
-        <span class="news-text">Neuer Kollege: Patrick Schlüer ab 05.01.2026</span>
-      </div>
+      @for (singleNews of news(); track singleNews.id) {
+        <div class="news-item">
+          <span class="news-date">{{ singleNews.createdAt | date: 'dd.MM.yyyy' }}</span>
+          <span class="news-text">{{ singleNews.content }}</span>
+        </div>
+      }
     </div>
   </mat-card-content>
 </mat-card>

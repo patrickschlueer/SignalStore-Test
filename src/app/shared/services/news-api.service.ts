@@ -2,8 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { News, NewsDto } from '../models/news.model';
-import { PaginatedResponse } from '../../shared/models/pagination.model';
-import { DeltaResponse } from '../../shared/models/delta-response.model';
+import { PaginatedResponse } from '../models/pagination.model';
+import { DeltaResponse } from '../models/delta-response.model';
 
 @Injectable({
   providedIn: 'root',

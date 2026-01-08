@@ -1,6 +1,5 @@
-import { BaseItem } from "@signaldb/core";
-
-export interface News extends BaseItem {
+export interface News {
+  id: string;
   title: string;
   content: string;
   publishedDate: Date;
