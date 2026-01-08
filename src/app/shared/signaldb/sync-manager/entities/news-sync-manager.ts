@@ -1,5 +1,5 @@
 import { Injectable, inject } from "@angular/core";
-import { News } from "../../../models/entities/news.model";
+import { News } from "../../../models/entities/news.interface";
 import { NewsApiService } from "../../../services/news-api.service";
 import { NewsCollection } from "../../collections/entities/news.collection";
 import { BaseSyncManager } from "../base/base-sync-manager";

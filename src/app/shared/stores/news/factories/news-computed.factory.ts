@@ -1,5 +1,5 @@
 import { computed, Signal } from '@angular/core';
-import { News } from '../../../models/entities/news.model';
+import { News } from '../../../models/entities/news.interface';
 
 export function newsComputedFactory(newsEntities: Signal<News[]>) {
   return {

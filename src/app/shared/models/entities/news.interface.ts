@@ -1,7 +1,6 @@
 import { BaseEntity } from '../base/base-entity.interface';
 
 export interface News extends BaseEntity {
-  id: string;
   title: string;
   content: string;
   publishedDate: Date;

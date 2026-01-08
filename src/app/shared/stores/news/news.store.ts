@@ -7,7 +7,7 @@ import {
   loadSuccess
 } from './reducers/event.reducers';
 import { createNewsEventHandlers } from './handlers/news.handlers';
-import { News } from '../../models/entities/news.model';
+import { News } from '../../models/entities/news.interface';
 import { newsEvents } from './events/news.events';
 
 const newsConfig = entityConfig({

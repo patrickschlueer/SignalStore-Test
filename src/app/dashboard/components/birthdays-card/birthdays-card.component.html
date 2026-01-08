@@ -1,0 +1,18 @@
+<!-- Upcoming Events Card -->
+<mat-card class="dashboard-card events-card">
+  <mat-card-header>
+    <span class="material-symbols-outlined" mat-card-avatar>celebration</span>
+    <mat-card-title>Anstehende Geburtstage</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="events-list">
+      @for (birthday of birthdays(); track birthday.id) {
+      <div class="event-item">
+        <span class="event-date">{{ birthday.birthday | date: 'dd.MM.yyyy'}}</span>
+        <span class="event-separator"> - </span>
+        <span class="event-name">{{ birthday.userName }}</span>
+      </div>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -125,10 +125,14 @@ export class SyncStrategy {
     methodName: string,
     params: any[] = []
   ): Promise<T[]> {
-    
+    console.log('load from backend', methodName, params);
     try {
+      console.log(apiService);
+      console.log(methodName);
       const result$ = apiService[methodName](...params);
       const response = await firstValueFrom(result$) as PaginatedResponse<T>;
+
+      console.log(response);
       
       if (!response || !response.data) {
         return [];
@@ -136,6 +140,7 @@ export class SyncStrategy {
       
       return response.data;
     } catch (error) {
+      console.log(error);
       return [];
     }
   }

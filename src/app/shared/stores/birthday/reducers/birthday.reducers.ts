@@ -1,5 +1,5 @@
 import { setAllEntities } from '@ngrx/signals/entities';
-import { newsEvents } from '../events/birthday.events';
+import { birthdayEvents } from '../events/birthday.events';
 
 export function loadInitial() {
   return {
@@ -8,7 +8,7 @@ export function loadInitial() {
 }
 
 export function loadSuccess(
-  event: ReturnType<typeof newsEvents.loadedSuccess>,
+  event: ReturnType<typeof birthdayEvents.loadedSuccess>,
   config: { collection: string }
 ) {
   return [

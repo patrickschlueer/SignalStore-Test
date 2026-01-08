@@ -2,7 +2,7 @@ import { Component, inject, Signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { NewsStore } from '../../../shared/stores/news/news.store';
 import { DatePipe } from '@angular/common';
-import { News } from '../../../shared/models/entities/news.model';
+import { News } from '../../../shared/models/entities/news.interface';
 
 @Component({
   selector: 'app-news-card',

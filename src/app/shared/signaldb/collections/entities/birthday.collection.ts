@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { News } from '../../../models/entities/news.interface';
+import { Birthday } from '../../../models/entities/birthday.interface';
 import { BaseCollection } from '../base/base.collection';
 
 /**
- * SignalDB Collection for News
+ * SignalDB Collection for Birthdays
  * Provides persistent storage in IndexedDB with automatic synchronization
  */
 @Injectable({
   providedIn: 'root'
 })
-export class NewsCollection extends BaseCollection<News> {
+export class BirthdayCollection extends BaseCollection<Birthday> {
   
   constructor() {
-    super('news');
+    super('birthday');
   }
 }
