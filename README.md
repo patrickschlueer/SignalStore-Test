@@ -1,4 +1,4 @@
-# POiNT Internal Application
+# POINT Internal Application
 
 Modern internal business management platform built with Angular 21 and Material Design 3.
 
