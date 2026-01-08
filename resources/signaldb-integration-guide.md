@@ -1,6 +1,6 @@
 # SignalDB Integration Guide
 
-This guide shows how to integrate SignalDB with SignalStore for offline-first data persistence with delta synchronization, using NewsStore as an example.
+This guide shows how to integrate SignalDB with SignalStore for offline-first data persistence with delta synchronization, using the Reactive Collection Pattern.
 
 ## What is SignalDB?
 
@@ -24,23 +24,32 @@ Reading from IndexedDB is much faster than API calls.
 ### ✅ Persistent Timestamps
 Sync metadata is stored persistently, surviving page reloads.
 
+### ✅ Automatic UI Updates
+Collection changes automatically propagate to UI via reactive signals.
+
 ---
 
 ## Architecture Overview
 
 ```
 Component
-    ↓ calls loadNews()
-SignalStore
-    ↓ fires load event
-Event Handler
-    ↓ calls sync()
-Sync Manager ← manages sync logic
+    ↓ inject store
+SignalStore (Reactive)
+    ↓ computed reads from
+Collection (SignalDB) ← manages sync
     ↓ pulls data
-Collection ← wraps IndexedDB
-    ↓ stores/retrieves
-IndexedDB ← persistent storage
+Sync Manager
+    ↓ calls API
+Backend (Delta Endpoint)
+    ↓ stores in
+IndexedDB (Persistent)
 ```
+
+**Key Difference from Event-Based Pattern:**
+- No events, reducers, or handlers needed
+- Store reads directly from reactive collection
+- Collection is single source of truth
+- Changes propagate automatically
 
 ---
 
@@ -50,18 +59,15 @@ IndexedDB ← persistent storage
 
 Your entity **must** extend `BaseEntity` which requires an `id` field.
 
-**File:** `models/entities/news.model.ts`
+**File:** `models/entities/birthday.interface.ts`
 
 ```typescript
 import { BaseEntity } from '../base/base-entity.interface';
 
-export interface News extends BaseEntity {
+export interface Birthday extends BaseEntity {
   id: string;  // Required by BaseEntity
-  title: string;
-  content: string;
-  createdAt: Date;
-  updatedAt: Date;
-  // ... other fields
+  userName: string;
+  birthday: Date;
 }
 ```
 
@@ -71,39 +77,39 @@ export interface News extends BaseEntity {
 
 Your API service needs two methods:
 
-**File:** `core/api/news-api.service.ts`
+**File:** `services/birthday-api.service.ts`
 
 ```typescript
 @Injectable({ providedIn: 'root' })
-export class NewsApiService {
-  private apiUrl = `${environment.apiUrl}/news`;
+export class BirthdayApiService {
+  private apiUrl = `${environment.apiUrl}/birthdays`;
 
   constructor(private http: HttpClient) {}
 
   /**
    * Full load - used for initial sync
    */
-  getNews(pageNumber: number, pageSize: number): Observable<PaginatedResponse<News>> {
+  getBirthdays(pageNumber: number, pageSize: number): Observable<PaginatedResponse<Birthday>> {
     const params = new HttpParams()
       .set('pageNumber', pageNumber.toString())
       .set('pageSize', pageSize.toString());
-    return this.http.get<PaginatedResponse<News>>(this.apiUrl, { params });
+    return this.http.get<PaginatedResponse<Birthday>>(this.apiUrl, { params });
   }
 
   /**
    * Delta load - used for subsequent syncs
    * Backend returns only changes since lastSyncTimestamp
    */
-  getDelta(lastSyncTimestamp: number): Observable<DeltaResponse<News>> {
+  getDelta(lastSyncTimestamp: number): Observable<DeltaResponse<Birthday>> {
     const params = new HttpParams().set('since', lastSyncTimestamp.toString());
-    return this.http.get<DeltaResponse<News>>(`${this.apiUrl}/delta`, { params });
+    return this.http.get<DeltaResponse<Birthday>>(`${this.apiUrl}/delta`, { params });
   }
 }
 ```
 
 **Backend Requirements:**
-- `GET /api/news` → Returns paginated list (first sync)
-- `GET /api/news/delta?since=<timestamp>` → Returns delta response (subsequent syncs)
+- `GET /api/birthdays` → Returns paginated list (first sync)
+- `GET /api/birthdays/delta?since=<timestamp>` → Returns delta response (subsequent syncs)
 
 **Delta Response Format:**
 ```typescript
@@ -119,235 +125,338 @@ interface DeltaResponse<T> {
 
 ### Step 3: Create SignalDB Collection
 
-**File:** `signaldb/collections/entities/news.collection.ts`
+**File:** `signaldb/collections/entities/birthday.collection.ts`
 
 ```typescript
 import { Injectable } from '@angular/core';
 import { BaseCollection } from '../base/base.collection';
-import { News } from '../../../models/entities/news.model';
+import { Birthday } from '../../../models/entities/birthday.interface';
 
 /**
- * News Collection
- * SignalDB collection for news with IndexedDB persistence
+ * Birthday Collection
+ * SignalDB collection with IndexedDB persistence and Angular reactivity
  */
 @Injectable({ providedIn: 'root' })
-export class NewsCollection extends BaseCollection<News> {
-  
+export class BirthdayCollection extends BaseCollection<Birthday> {
   constructor() {
-    super('news'); // Collection name in IndexedDB
+    super('birthdays'); // Collection name in IndexedDB
   }
 }
 ```
 
-**What it does:**
-- Wraps IndexedDB operations
-- Provides type-safe CRUD operations
-- Handles persistence automatically
+**What BaseCollection provides:**
+- IndexedDB persistence adapter
+- Angular reactivity adapter (automatic signal updates)
+- Type-safe CRUD operations
 
 **IndexedDB Structure:**
 ```
 IndexedDB
-  └─ point-news  ← Your data stored here
+  └─ point-birthdays  ← Your data stored here
 ```
 
 ---
 
 ### Step 4: Create Sync Manager
 
-**File:** `signaldb/sync-manager/entities/news-sync-manager.ts`
+**File:** `signaldb/sync-manager/entities/birthday-sync-manager.ts`
 
 ```typescript
 import { Injectable, inject } from '@angular/core';
 import { BaseSyncManager } from '../base/base-sync-manager';
-import { News } from '../../../models/entities/news.model';
-import { NewsCollection } from '../../collections/entities/news.collection';
-import { NewsApiService } from '../../../../core/api/news-api.service';
+import { Birthday } from '../../../models/entities/birthday.interface';
+import { BirthdayCollection } from '../../collections/entities/birthday.collection';
+import { BirthdayApiService } from '../../../services/birthday-api.service';
 
 /**
- * News Sync Manager
- * Manages synchronization between backend and IndexedDB for news
+ * Birthday Sync Manager
+ * Manages synchronization between backend and IndexedDB
  */
 @Injectable({ providedIn: 'root' })
-export class NewsSyncManager extends BaseSyncManager<News> {
-  
+export class BirthdaySyncManager extends BaseSyncManager<Birthday> {
   constructor() {
-    const newsCollection = inject(NewsCollection);
-    const newsApiService = inject(NewsApiService);
-    super('news', newsCollection, newsApiService);
+    const birthdayCollection = inject(BirthdayCollection);
+    const birthdayApiService = inject(BirthdayApiService);
+    super('birthdays', birthdayCollection, birthdayApiService);
   }
 
   protected getLoadMethod(): string {
-    return 'getNews'; // API method for full load
+    return 'getBirthdays'; // API method for full load
   }
 
   protected getDeltaMethod(): string {
     return 'getDelta'; // API method for delta load
   }
-  
-  // Optional: Override default pagination
-  // protected getDefaultParams(): any[] {
-  //   return [1, 50]; // pageNumber, pageSize
-  // }
 }
 ```
 
-**What it does:**
-- Manages sync between backend and IndexedDB
-- Stores sync timestamps persistently
-- Implements cache-first strategy with delta updates
+**What BaseSyncManager provides:**
+- Delta sync logic with upsert support
+- Persistent timestamp management
+- Cache-first strategy
+- Handles restored soft-deleted entities
 
 **IndexedDB Structure (with sync metadata):**
 ```
 IndexedDB
-  ├─ point-news          ← Your data
-  └─ point-_sync_news    ← Sync metadata (timestamps)
+  ├─ point-birthdays          ← Your data
+  └─ point-_sync_birthdays    ← Sync metadata (timestamps)
 ```
 
 ---
 
-### Step 5: Update Store Handler
+### Step 5: Create Store Structure
 
-**File:** `stores/news/handlers/news.handlers.ts`
+Create the following directory structure:
+
+```
+stores/birthday/
+├── state/
+│   └── birthday.state.ts
+├── factories/
+│   └── birthday-computed.factory.ts
+├── methods/
+│   └── birthday.methods.ts
+└── birthday.store.ts
+```
+
+#### 5.1 State Definition
+
+**File:** `stores/birthday/state/birthday.state.ts`
 
 ```typescript
-import { inject } from '@angular/core';
-import { Events } from '@ngrx/signals/events';
-import { switchMap, map, from } from 'rxjs';
-import { newsEvents } from '../events/news-events';
-import { NewsSyncManager } from '../../../signaldb/sync-manager/entities/news-sync-manager';
-import { NewsCollection } from '../../../signaldb/collections/entities/news.collection';
+export interface BirthdayState {
+  isLoading: boolean;
+  isSyncing: boolean;
+}
 
-export function createNewsEventHandlers() {
-  const events = inject(Events);
-  const syncManager = inject(NewsSyncManager);
-  const newsCollection = inject(NewsCollection);
+export const initialBirthdayState: BirthdayState = {
+  isLoading: false,
+  isSyncing: false
+};
+```
+
+#### 5.2 Computed Factory
+
+**File:** `stores/birthday/factories/birthday-computed.factory.ts`
+
+```typescript
+import { computed, inject } from '@angular/core';
+import { BirthdayCollection } from '../../../signaldb/collections/entities/birthday.collection';
+
+export function createBirthdayComputedFactory() {
+  const birthdayCollection = inject(BirthdayCollection);
   
   return {
-    loadNotifications: events.on(newsEvents.load).pipe(
-      switchMap(() => from(
-        (async () => {
-          // 1. Trigger sync (cache-first + delta)
-          await syncManager.sync();
-          
-          // 2. Read from local collection
-          return newsCollection.collection.find().fetch();
-        })()
-      )),
-      map(result => newsEvents.loadedSuccess(result))
-    )
+    // Raw data from collection (reactive!)
+    birthdays: computed(() => birthdayCollection.collection.find().fetch()),
+    
+    // Sorted birthdays
+    sortedBirthdays: computed(() => {
+      const all = birthdayCollection.collection.find().fetch();
+      return [...all].sort((a, b) => 
+        new Date(a.birthday).getTime() - new Date(b.birthday).getTime()
+      );
+    }),
+    
+    // Total count
+    totalCount: computed(() => {
+      return birthdayCollection.collection.find().fetch().length;
+    })
   };
 }
 ```
 
-**Data Flow:**
+**Key Points:**
+- Inject collection directly
+- Use `computed()` for derived values
+- Collection is reactive - changes propagate automatically
+- No manual state management needed
 
-**First Load (empty cache):**
-```
-1. syncManager.sync()
-2. → Check lastSyncTimestamp → undefined
-3. → Full load: getNews(1, 100)
-4. → Save to IndexedDB: point-news
-5. → Save timestamp to: point-_sync_news
-6. collection.find().fetch()
-7. → Return data from IndexedDB
-```
+#### 5.3 Methods Factory
 
-**Second Load (page reload):**
-```
-1. syncManager.sync()
-2. → Load lastSyncTimestamp from point-_sync_news
-3. → Delta load: getDelta(1704709800000)
-4. → Apply changes to IndexedDB:
-    - Insert created items
-    - Update modified items
-    - Delete removed items
-5. → Update timestamp in point-_sync_news
-6. collection.find().fetch()
-7. → Return updated data from IndexedDB
-```
-
----
-
-## Complete Example: Adding Events Entity
-
-Let's add a new entity with full SignalDB integration.
-
-### 1. Create Collection
+**File:** `stores/birthday/methods/birthday.methods.ts`
 
 ```typescript
-// signaldb/collections/entities/event.collection.ts
-@Injectable({ providedIn: 'root' })
-export class EventCollection extends BaseCollection<Event> {
-  constructor() { super('events'); }
-}
-```
+import { inject } from '@angular/core';
+import { BirthdaySyncManager } from '../../../signaldb/sync-manager/entities/birthday-sync-manager';
 
-### 2. Create Sync Manager
-
-```typescript
-// signaldb/sync-manager/entities/event-sync-manager.ts
-@Injectable({ providedIn: 'root' })
-export class EventSyncManager extends BaseSyncManager<Event> {
-  constructor() {
-    const eventCollection = inject(EventCollection);
-    const eventApiService = inject(EventApiService);
-    super('events', eventCollection, eventApiService);
-  }
-
-  protected getLoadMethod(): string { return 'getEvents'; }
-  protected getDeltaMethod(): string { return 'getDelta'; }
-}
-```
-
-### 3. Update Handler
-
-```typescript
-// stores/events/handlers/event.handlers.ts
-export function createEventEventHandlers() {
-  const events = inject(Events);
-  const syncManager = inject(EventSyncManager);
-  const eventCollection = inject(EventCollection);
+export function createBirthdayMethods() {
+  const syncManager = inject(BirthdaySyncManager);
   
   return {
-    loadEvents: events.on(eventEvents.load).pipe(
-      switchMap(() => from((async () => {
+    /**
+     * Synchronize birthdays with backend
+     * - First call: Full load from backend
+     * - Subsequent calls: Delta load (only changes)
+     */
+    loadBirthdays: async () => {
+      try {
         await syncManager.sync();
-        return eventCollection.collection.find().fetch();
-      })())),
-      map(result => eventEvents.loadedSuccess(result))
-    )
+      } catch (error) {
+        console.error('Birthday sync failed:', error);
+      }
+    },
+    
+    /**
+     * Clear local cache and force full reload on next sync
+     */
+    clearCache: () => {
+      syncManager.clearCache();
+    },
+    
+    /**
+     * Force refresh: clear cache and reload
+     */
+    refreshData: async () => {
+      syncManager.clearCache();
+      await syncManager.sync();
+    }
   };
 }
 ```
 
-**That's it!** Only 3 small files needed for full offline-first support.
+#### 5.4 Store Composition
+
+**File:** `stores/birthday/birthday.store.ts`
+
+```typescript
+import { signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
+import { createBirthdayComputedFactory } from './factories/birthday-computed.factory';
+import { createBirthdayMethods } from './methods/birthday.methods';
+import { initialBirthdayState } from './state/birthday.state';
+
+export const BirthdayStore = signalStore(
+  { providedIn: 'root' },
+  withState(initialBirthdayState),
+  withComputed(createBirthdayComputedFactory),
+  withMethods(createBirthdayMethods),
+  withHooks({
+    onInit(store) {
+      // Auto-load on store initialization
+      store.loadBirthdays();
+    }
+  })
+);
+```
+
+**Only ~15 lines!** The store just composes the pieces together.
 
 ---
 
-## Manual Operations
-
-### Clear Cache
+### Step 6: Use in Components
 
 ```typescript
-import { inject } from '@angular/core';
-import { NewsSyncManager } from '...';
+import { Component, inject, Signal } from '@angular/core';
+import { BirthdayStore } from '../../shared/stores/birthday/birthday.store';
+import { Birthday } from '../../shared/models/entities/birthday.interface';
 
-export class SomeComponent {
-  private syncManager = inject(NewsSyncManager);
-
-  clearCache() {
-    this.syncManager.clearCache(); // Clears all data from IndexedDB
+@Component({
+  selector: 'app-birthday-list',
+  standalone: true,
+  template: `
+    <div>
+      <h2>Upcoming Birthdays ({{ totalCount() }})</h2>
+      @for (birthday of birthdays(); track birthday.id) {
+        <div>
+          {{ birthday.userName }} - {{ birthday.birthday | date:'dd.MM.yyyy' }}
+        </div>
+      }
+      <button (click)="refresh()">Refresh</button>
+    </div>
+  `
+})
+export class BirthdayListComponent {
+  private readonly birthdayStore = inject(BirthdayStore);
+  
+  // Reactive signals - update automatically!
+  readonly birthdays: Signal<Birthday[]> = this.birthdayStore.sortedBirthdays;
+  readonly totalCount: Signal<number> = this.birthdayStore.totalCount;
+  
+  // Methods
+  refresh() {
+    this.birthdayStore.refreshData();
   }
 }
 ```
 
-### Force Sync
+**Key Points:**
+- No constructor needed (store auto-initializes)
+- Signals update automatically when collection changes
+- No manual subscription management
+
+---
+
+## Complete Data Flow
+
+### First Load (Empty Cache):
+```
+1. BirthdayStore initialized
+2. onInit hook → loadBirthdays()
+3. SyncManager.sync() starts
+4. lastSyncTime = undefined → Full Load
+5. API: GET /api/birthdays?pageNumber=1&pageSize=100
+6. Backend returns: { data: [10 birthdays], totalCount: 10 }
+7. SignalDB saves to IndexedDB: point-birthdays
+8. SignalDB saves timestamp to: point-_sync_birthdays
+9. Computed reads collection → UI shows 10 birthdays
+```
+
+### Second Load (Page Reload):
+```
+1. BirthdayStore initialized
+2. onInit hook → loadBirthdays()
+3. Computed reads collection → UI shows 10 birthdays IMMEDIATELY ⚡
+4. SyncManager.sync() runs in background
+5. lastSyncTime loaded from point-_sync_birthdays
+6. API: GET /api/birthdays/delta?since=1704709800000
+7. Backend returns: { created: [2 new], updated: [1 modified], deleted: [] }
+8. SignalDB applies delta:
+   - Insert 2 new birthdays
+   - Update 1 existing birthday (with upsert logic)
+9. Collection updates → Computed detects change → UI shows 12 birthdays automatically! 🎉
+```
+
+### Soft-Delete Restoration (Edge Case):
+```
+1. Birthday ID=123 soft-deleted: IsDeleted = true
+2. Delta: deleted: ["123"]
+3. SignalDB: removeOne("123") → Birthday removed from collection
+4. Birthday ID=123 restored: IsDeleted = false
+5. Delta: updated: [{ id: "123", ... }]
+6. SignalDB: findOne("123") → not found
+7. SignalDB: insert({ id: "123", ... }) ← Upsert logic! ✅
+8. Birthday 123 is back in collection
+```
+
+---
+
+## Upsert Logic Explained
+
+The `applyDelta()` method handles edge cases with upsert logic:
 
 ```typescript
-async forceSync() {
-  await this.syncManager.sync(); // Manually trigger sync
-}
+// Update existing items (with Upsert logic)
+delta.updated.forEach(item => {
+  const exists = collection.collection.findOne({ id: item.id });
+  
+  if (exists) {
+    // Entity exists → Update
+    collection.collection.updateOne(
+      { id: item.id },
+      { $set: item }
+    );
+  } else {
+    // Entity doesn't exist (e.g., restored from soft-delete) → Insert
+    collection.collection.insert(item);
+  }
+});
 ```
+
+**Why is this needed?**
+- Handles restored soft-deleted entities
+- Prevents errors when updating non-existent items
+- Makes sync more robust against race conditions
 
 ---
 
@@ -358,37 +467,104 @@ async forceSync() {
 1. Open DevTools → Application tab
 2. Click "IndexedDB" in left sidebar
 3. Expand your database:
-   - `point-news` → See your data
-   - `point-_sync_news` → See sync timestamps
+   - `point-birthdays` → See your data
+   - `point-_sync_birthdays` → See sync timestamps
 
 ### Verify Sync Behavior
 
 **First load:**
-- Check Network tab → Should see API call to `/api/news`
+- Network tab → `GET /api/birthdays` (full load)
+- IndexedDB → Data appears
+- UI → Shows data immediately
 
 **Second load (reload page):**
-- Check Network tab → Should see API call to `/api/news/delta?since=...`
-- Timestamp in URL matches IndexedDB timestamp
+- UI → Shows cached data INSTANTLY (before network call)
+- Network tab → `GET /api/birthdays/delta?since=...` (delta load)
+- If changes exist → UI updates automatically
 
-**Third load (no changes on backend):**
+**Third load (no backend changes):**
+- UI → Shows cached data instantly
 - Delta response: `{ created: [], updated: [], deleted: [] }`
-- No data changes in IndexedDB
+- No UI changes (as expected)
+
+---
+
+## Key Differences from Event-Based Pattern
+
+### Old Event-Based Pattern:
+```
+Component → Event → Reducer → State → Component
+         ↓
+      Handler → API → Event → Reducer
+```
+
+### New Reactive Pattern:
+```
+Component → Store (Computed) → Collection → Component
+                                   ↓
+                            Sync Manager → API
+```
+
+**Benefits:**
+- ✅ 40% less code
+- ✅ No events/reducers/handlers
+- ✅ Immediate cache display
+- ✅ Automatic UI updates
+- ✅ Simpler mental model
+
+---
+
+## Best Practices
+
+### ✅ DO:
+- Read directly from collection via computed
+- Use upsert logic for updates (already built-in)
+- Let store auto-initialize with onInit hook
+- Keep computed pure (no side effects)
+- Handle sync errors gracefully
+
+### ⚠️ DON'T:
+- Don't manually manage state (collection does it)
+- Don't subscribe to collection manually (use computed)
+- Don't bypass sync manager (always use sync())
+- Don't call loadX() from component constructor (let store handle it)
 
 ---
 
 ## When to Use SignalDB
 
 ### ✅ Good Use Cases
+- User data (birthdays, profiles)
 - News/notifications
 - Events/calendar data
-- Employee lists
 - Reference data (skills, categories)
 - Data that changes infrequently
 
 ### ⚠️ Not Ideal For
 - Real-time chat messages (use WebSockets)
 - Large files/media (use direct backend access)
-- Sensitive data requiring encryption at rest
+- Frequently changing data (every second)
+- Data that requires server-side validation before display
+
+---
+
+## Troubleshooting
+
+### Issue: Data not showing
+**Check:**
+1. Is collection reactive? (BaseCollection has `reactivity: createAngularReactivityAdapter()`)
+2. Is sync manager calling API? (Check network tab)
+3. Is data in IndexedDB? (Check DevTools)
+
+### Issue: Duplicate API calls
+**Check:**
+1. Store onInit hook (should only call once)
+2. Component not calling loadX() again (remove from constructor)
+
+### Issue: Updated entity not appearing after soft-delete restore
+**Fixed!** Upsert logic handles this automatically. If issue persists:
+1. Check backend: Is `IsDeleted = false` in updated array?
+2. Check network: Is delta response correct?
 
 ---
 
@@ -400,17 +576,27 @@ To add SignalDB to any entity:
 2. ✅ API service has `getAll()` and `getDelta()` methods
 3. ✅ Create `{Entity}Collection` (~10 lines)
 4. ✅ Create `{Entity}SyncManager` (~25 lines)
-5. ✅ Update store handler to use sync manager (~15 lines)
+5. ✅ Create store structure:
+   - `state/{entity}.state.ts`
+   - `factories/{entity}-computed.factory.ts`
+   - `methods/{entity}.methods.ts`
+   - `{entity}.store.ts`
+6. ✅ Use signals in component
 
 **Result:**
 - Offline-first data access
 - Automatic delta synchronization
 - Persistent timestamp management
-- Reduced backend load
+- Immediate cache display with background sync
+- Automatic UI updates via reactive signals
+- Robust soft-delete handling
+
+**Total: ~60 lines of code for full offline-first reactive store!** 🚀
 
 ---
 
 ## Next Steps
 
-- Review [SignalStore Setup Guide](./signalstore-setup-guide.md) for store architecture
+- Review [Reactive Collection Pattern Guide](./signalstore-reactive-pattern.md) for detailed store architecture
 - Check SignalDB documentation: https://signaldb.js.org/
+- Explore example implementation: `stores/birthday/` and `stores/news/`
