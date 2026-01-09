@@ -12,7 +12,7 @@ export function createNewsEventHandlers() {
   
   return {
     // Async Event Handler: Lädt News mit SignalDB (Cache-First)
-    loadNotifications: events.on(newsEvents.load).pipe(
+    loadNews: events.on(newsEvents.load).pipe(
       switchMap(() => from(
         (async () => {
           // 1. Sync ausführen (Cache-First)

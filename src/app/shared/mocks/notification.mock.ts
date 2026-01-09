@@ -7,7 +7,7 @@ export const INITIAL_NOTIFICATIONS: Notification[] = [
     message: 'Hey, hast du Zeit für ein kurzes Meeting?',
     timestamp: new Date(Date.now() - 5 * 60 * 1000),
     read: false,
-    from: { firstName: 'Max', lastName: 'Mustermann' }
+    from: { id: '1', userName: 'Max Mustermann', firstName: 'Max', lastName: 'Mustermann' }
   },
   {
     id: '2',
@@ -15,7 +15,7 @@ export const INITIAL_NOTIFICATIONS: Notification[] = [
     message: 'Team-Sync am Freitag um 14:00 Uhr',
     timestamp: new Date(Date.now() - 60 * 60 * 1000),
     read: false,
-    from: { firstName: 'Sarah', lastName: 'Schmidt' }
+    from: { id: '2', userName: 'Sarah Schmidt', firstName: 'Sarah', lastName: 'Schmidt' }
   },
   {
     id: '3',
@@ -23,7 +23,7 @@ export const INITIAL_NOTIFICATIONS: Notification[] = [
     message: 'Version 2.4.0 steht zum Download bereit',
     timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000),
     read: true,
-    from: { firstName: 'System', lastName: 'Admin' }
+    from: { id: '3', userName: 'System Admin', firstName: 'System', lastName: 'Admin' }
   }
 ];
 
@@ -33,34 +33,34 @@ export const TEST_NOTIFICATIONS: Omit<Notification, 'id'>[] = [
     message: 'Hey, hast du Zeit für ein kurzes Meeting?',
     timestamp: new Date(Date.now() - 5 * 60 * 1000),
     read: false,
-    from: { firstName: 'Max', lastName: 'Mustermann' }
+    from: { id: '1', userName: 'Max Mustermann', firstName: 'Max', lastName: 'Mustermann' }
   },
   {
     title: 'Meeting-Einladung',
     message: 'Team-Sync am Freitag um 14:00 Uhr',
     timestamp: new Date(Date.now() - 60 * 60 * 1000),
     read: false,
-    from: { firstName: 'Sarah', lastName: 'Schmidt' }
+    from: { id: '2', userName: 'Sarah Schmidt', firstName: 'Sarah', lastName: 'Schmidt' }
   },
   {
     title: 'Systemupdate verfügbar',
     message: 'Version 2.4.0 steht zum Download bereit',
     timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000),
     read: false,
-    from: { firstName: 'System', lastName: 'Admin' }
+    from: { id: '3', userName: 'System Admin', firstName: 'System', lastName: 'Admin' }
   },
   {
     title: 'Projekt genehmigt',
     message: 'Dein Projektantrag wurde genehmigt!',
     timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000),
     read: false,
-    from: { firstName: 'Anna', lastName: 'Meyer' }
+    from: { id: '4', firstName: 'Anna', lastName: 'Meyer', userName: 'Anna Meyer' }
   },
   {
     title: 'Code Review fertig',
     message: 'Dein Pull Request wurde reviewed',
     timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000),
     read: false,
-    from: { firstName: 'Tom', lastName: 'Wagner' }
+    from: { id: '5', userName: 'Tom Wagner', firstName: 'Tom', lastName: 'Wagner' }
   }
 ];

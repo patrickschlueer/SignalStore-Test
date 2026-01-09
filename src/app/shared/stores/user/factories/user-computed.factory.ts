@@ -1,7 +1,7 @@
 import { computed, Signal } from '@angular/core';
-import { User } from '../../../models/entities/user.interface';
+import { Employee } from '../../../models/entities/employee.interface';
 
-export function userComputedFactory(user: Signal<User | null>) {
+export function userComputedFactory(user: Signal<Employee | null>) {
   return {
     fullName: computed(() => {
       const currentUser = user();

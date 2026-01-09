@@ -1,4 +1,4 @@
-import { User } from './user.interface';
+import { Employee } from './employee.interface';
 
 export interface Notification {
   id: string;
@@ -6,5 +6,5 @@ export interface Notification {
   message: string;
   timestamp: Date;
   read: boolean;
-  from: User;
+  from: Employee;
 }
