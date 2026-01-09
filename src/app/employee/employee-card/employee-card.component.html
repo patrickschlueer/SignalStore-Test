@@ -1,0 +1,59 @@
+<mat-card class="employee-card">
+  <div class="card-header">
+    <span class="employee-name">{{ employee().lastName }}, {{ employee().firstName }}</span>
+  </div>
+  
+  <mat-card-content>
+    <!-- Avatar / Foto -->
+    <div class="employee-photo">
+      @if (employee().avatarUrl) {
+        <img [src]="employee().avatarUrl" [alt]="employee().userName" />
+      } @else {
+        <div class="employee-initials">
+          {{ getInitials(employee()) }}
+        </div>
+      }
+    </div>
+    
+    <!-- Kontaktdaten -->
+    <div class="employee-info">
+      <!-- E-Mail -->
+      @if (employee().email) {
+        <div class="info-row">
+          <span class="material-symbols-outlined">email</span>
+          <a [href]="'mailto:' + employee().email">{{ employee().email }}</a>
+        </div>
+      }
+      
+      <!-- Telefon -->
+      @if (employee().phoneNumber) {
+        <div class="info-row">
+          <span class="material-symbols-outlined">phone</span>
+          <a [href]="'tel:' + employee().phoneNumber">{{ employee().phoneNumber }}</a>
+        </div>
+      }
+      
+      <!-- Mobil -->
+      @if (employee().mobileNumber) {
+        <div class="info-row">
+          <span class="material-symbols-outlined">smartphone</span>
+          <a [href]="'tel:' + employee().mobileNumber">{{ employee().mobileNumber }}</a>
+        </div>
+      }
+      
+      <!-- Geburtsdatum -->
+      @if (employee().dateOfBirth) {
+        <div class="info-row">
+          <span class="material-symbols-outlined">cake</span>
+          <span>{{ employee().dateOfBirth | date:'dd.MM.yyyy' }}</span>
+        </div>
+      }
+    </div>
+  </mat-card-content>
+  
+  <mat-card-actions>
+    <button matButton="outlined" color="primary">
+      Skills anzeigen
+    </button>
+  </mat-card-actions>
+</mat-card>
