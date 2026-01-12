@@ -7,6 +7,7 @@ export interface Employee extends BaseEntity {
   email?: string;
   avatarUrl?: string;
   dateOfBirth?: Date;
+  birthday?: Date; // Computed: Geburtstag im aktuellen Jahr (vom Backend berechnet)
   phoneNumber?: string;
   mobileNumber?: string;
 }

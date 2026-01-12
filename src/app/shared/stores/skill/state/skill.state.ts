@@ -1,9 +1,9 @@
-export interface BirthdayState {
+export interface SkillState {
   isLoading: boolean;
   isSyncing: boolean;
 }
 
-export const initialBirthdayState: BirthdayState = {
+export const initialSkillState: SkillState = {
   isLoading: false,
   isSyncing: false
 };

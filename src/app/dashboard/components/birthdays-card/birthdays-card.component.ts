@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { BirthdayStore } from '../../../shared/stores/birthday/birthday.store';
+import { EmployeeStore } from '../../../shared/stores/employee/employee.store';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -13,6 +13,6 @@ import { DatePipe } from '@angular/common';
   styleUrl: './birthdays-card.component.scss'
 })
 export class BirthdaysCardComponent {
-  private readonly birthdayStore = inject(BirthdayStore); 
-  protected readonly birthdays = this.birthdayStore.sortedBirthdays;
+  private readonly employeeStore = inject(EmployeeStore); 
+  protected readonly birthdays = this.employeeStore.upcomingBirthdays;
 }
