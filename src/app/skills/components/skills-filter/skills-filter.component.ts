@@ -1,10 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
-
-type FilterType = 'all' | 'experts' | 'frontend' | 'backend' | 'fullstack';
+import { EmployeeStore } from '../../../shared/stores/employee/employee.store';
+import { SkillFilter } from '../../../shared/models/helper/skill-filter.interface';
 
 @Component({
   selector: 'app-skills-filter',
@@ -19,17 +19,18 @@ type FilterType = 'all' | 'experts' | 'frontend' | 'backend' | 'fullstack';
   styleUrl: './skills-filter.component.scss'
 })
 export class SkillsFilterComponent {
-  searchQuery = '';
-  selectedFilter = signal<FilterType>('all');
+  private readonly employeeStore = inject(EmployeeStore);
+
+  searchQuery = this.employeeStore.searchQuery;
+  selectedFilter = this.employeeStore.skillFilter;
+  skillFilters = this.employeeStore.skillFilters;
+
 
   onSearchChange(query: string): void {
-    // TODO: Emit search event to parent
-    console.log('Search:', query);
+    this.employeeStore.setSearchQuery(query);
   }
 
-  setFilter(filter: FilterType): void {
-    this.selectedFilter.set(filter);
-    // TODO: Emit filter event to parent
-    console.log('Filter:', filter);
+  setFilter(filter: SkillFilter): void {
+    this.employeeStore.setSkillFilter(filter);
   }
 }

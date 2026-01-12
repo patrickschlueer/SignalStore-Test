@@ -12,47 +12,48 @@
 
   <!-- Filter Chips (rechts daneben) -->
   <div class="flex gap-2">
-    <mat-chip-set aria-label="Filter selection">
-      <mat-chip 
-        [class.bg-red-600]="selectedFilter() === 'all'"
-        [class.text-white]="selectedFilter() === 'all'"
-        (click)="setFilter('all')"
-      >
-        Alle
-      </mat-chip>
+    <mat-chip-listbox aria-label="Filter selection">
+      @for (filter of skillFilters(); track filter.filterType) {
+      <mat-chip-option
+        [selectable]="selectedFilter() !== filter"
+        [selected]="selectedFilter() === filter"
+        (click)="setFilter(filter)">
+        @if (filter.filterIcon) {
+          <span class="material-symbols-outlined" matChipAvatar>{{filter.filterIcon}}</span>
+        }
+        {{filter.filterType}}
+      </mat-chip-option>
+      }
+
       
-      <mat-chip 
-        [class.bg-red-600]="selectedFilter() === 'experts'"
-        [class.text-white]="selectedFilter() === 'experts'"
-        (click)="setFilter('experts')"
-      >
+      <!-- <mat-chip-option
+        [selectable]="selectedFilter() !== 'experts'"
+        [selected]="selectedFilter() === 'experts'"
+        (click)="setFilter('experts')">
         <span class="material-symbols-outlined" matChipAvatar>star</span>
         Experts
-      </mat-chip>
+      </mat-chip-option>
       
-      <mat-chip 
-        [class.bg-red-600]="selectedFilter() === 'frontend'"
-        [class.text-white]="selectedFilter() === 'frontend'"
-        (click)="setFilter('frontend')"
-      >
+      <mat-chip-option
+        [selectable]="selectedFilter() !== 'frontend'"
+        [selected]="selectedFilter() === 'frontend'"
+        (click)="setFilter('frontend')">
         Frontend
-      </mat-chip>
+      </mat-chip-option>
       
-      <mat-chip 
-        [class.bg-red-600]="selectedFilter() === 'backend'"
-        [class.text-white]="selectedFilter() === 'backend'"
-        (click)="setFilter('backend')"
-      >
+      <mat-chip-option
+        [selectable]="selectedFilter() !== 'backend'"
+        [selected]="selectedFilter() === 'backend'"
+        (click)="setFilter('backend')">
         Backend
-      </mat-chip>
+      </mat-chip-option>
       
-      <mat-chip 
-        [class.bg-red-600]="selectedFilter() === 'fullstack'"
-        [class.text-white]="selectedFilter() === 'fullstack'"
-        (click)="setFilter('fullstack')"
-      >
+      <mat-chip-option
+        [selectable]="selectedFilter() !== 'fullstack'"
+        [selected]="selectedFilter() === 'fullstack'"
+        (click)="setFilter('fullstack')">
         Full-Stack
-      </mat-chip>
-    </mat-chip-set>
+      </mat-chip-option> -->
+    </mat-chip-listbox>
   </div>
 </div>

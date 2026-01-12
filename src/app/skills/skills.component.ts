@@ -17,6 +17,6 @@ import { SkillsCardComponent } from './components/skills-card/skills-card.compon
 export class SkillsComponent {
   protected readonly employeeStore = inject(EmployeeStore);
 
-  // Employees aus Store
-  protected readonly employees = this.employeeStore.sortedEmployees;
+  // Nutze gefilterte Employees
+  protected readonly employees = this.employeeStore.filteredEmployees;
 }

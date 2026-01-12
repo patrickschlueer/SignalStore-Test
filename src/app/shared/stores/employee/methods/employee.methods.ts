@@ -1,7 +1,9 @@
 import { inject } from '@angular/core';
+import { patchState } from '@ngrx/signals';
 import { EmployeeSyncManager } from '../../../signaldb/sync-manager/entities/employee-sync-manager';
+import { SkillFilter } from '../../../models/helper/skill-filter.interface';
 
-export function createEmployeeMethods() {
+export function createEmployeeMethods(store: any) {
   const syncManager = inject(EmployeeSyncManager);
   
   return {
@@ -31,6 +33,30 @@ export function createEmployeeMethods() {
     refreshData: async () => {
       syncManager.clearCache();
       await syncManager.sync();
+    },
+    
+    /**
+     * Set search query for filtering employees
+     */
+    setSearchQuery: (query: string) => {
+      patchState(store, { searchQuery: query });
+    },
+    
+    /**
+     * Set skill filter for filtering employees
+     */
+    setSkillFilter: (filter: SkillFilter) => {
+      patchState(store, { skillFilter: filter });
+    },
+    
+    /**
+     * Reset all filters to default
+     */
+    resetFilters: () => {
+      patchState(store, { 
+        searchQuery: '',
+        skillFilter: 'all'
+      });
     }
   };
 }
