@@ -1,0 +1,63 @@
+<mat-card class="employee-card">
+  <mat-card-header class="!p-3">
+    <!-- Header: Avatar + Name + Stats -->
+    <div class="flex items-start gap-4">
+      <!-- Avatar mit ngx-avatars -->
+      <ngx-avatars 
+        [name]="employee().userName"
+        [src]="employee().avatarUrl"
+        [round]="true"
+        class="shrink-0"
+      ></ngx-avatars>
+
+      <!-- Name + Stats -->
+      <div class="flex-1 min-w-0">
+        <h3 class="text-lg mb-1">
+          {{ employee().lastName }}, {{ employee().firstName }}
+        </h3>
+        <div class="text-sm">
+          {{ employee().totalSkillCount || 0 }} Skills • {{ employee().expertSkillCount || 0 }} Expert
+        </div>
+      </div>
+    </div>
+  </mat-card-header>
+  <mat-card-content class="!p-0">
+
+
+    <!-- Divider -->
+    <mat-divider></mat-divider>
+
+    <!-- Skills als mat-chips -->
+    <div class="p-3">
+      <mat-chip-listbox class="flex flex-wrap gap-2">
+        @for (skill of visibleSkills(); track skill.id) {
+          <mat-chip class="!h-auto">
+            <div class="flex items-center gap-1 py-1">
+              <span class="text-xs">{{ skill.skillName }}</span>
+              <span class="flex items-center gap-0.5">
+                @for (dot of getLevelDots(skill.level); track $index) {
+                  <span class="w-1.5 h-1.5 rounded-full" [class.bg-red-600]="dot" [class.bg-gray-300]="!dot"></span>
+                }
+              </span>
+            </div>
+          </mat-chip>
+        }
+      </mat-chip-listbox>
+
+      <!-- "+X mehr" Button -->
+      @if (remainingSkillsCount() > 0) {
+        <button 
+          matButton="outlined"
+          class="!text-sm !normal-case mt-2"
+          (click)="showAllSkills = !showAllSkills"
+        >
+          @if (showAllSkills) {
+            Weniger anzeigen
+          } @else {
+            +{{ remainingSkillsCount() }} mehr
+          }
+        </button>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>

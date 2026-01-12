@@ -1,0 +1,43 @@
+.filter-card {
+  margin-bottom: 24px;
+
+  mat-card-content {
+    padding: 16px !important;
+  }
+}
+
+.filter-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.search-field {
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+// Responsive
+@media (max-width: 1200px) {
+  .filter-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .search-field {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .filter-container {
+    grid-template-columns: 1fr;
+  }
+
+  .search-field {
+    grid-column: 1;
+  }
+}

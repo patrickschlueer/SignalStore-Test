@@ -1,0 +1,146 @@
+.skills-header {
+  margin-bottom: 24px;
+}
+
+.header-title {
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0 0 8px 0;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .subtitle {
+    margin: 0;
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 14px;
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.stat-card {
+  mat-card-content {
+    padding: 16px !important;
+  }
+
+  &.expert-card {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    
+    .stat-icon {
+      color: #f57c00;
+    }
+  }
+}
+
+.stat-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: var(--md-sys-color-primary);
+  
+  .expert-card & {
+    color: var(--md-sys-color-tertiary);
+  }
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--md-sys-color-on-surface);
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--md-sys-color-on-surface-variant);
+  font-weight: 500;
+}
+
+.skills-header {
+  margin-bottom: 24px;
+}
+
+.header-title {
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .subtitle {
+    margin: 4px 0 0 0;
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 14px;
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.stat-card {
+  mat-card-content {
+    padding: 16px !important;
+  }
+
+  .stat-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .stat-icon {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    color: var(--md-sys-color-primary);
+  }
+
+  .stat-info {
+    flex: 1;
+  }
+
+  .stat-value {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--mat-sys-on-surface);
+  }
+
+  .stat-label {
+    font-size: 14px;
+    color: var(--mat-sys-on-surface-variant);
+    margin-top: 4px;
+  }
+}
+
+.expert-card {
+  .stat-icon {
+    color: var(--md-sys-color-tertiary);
+  }
+}

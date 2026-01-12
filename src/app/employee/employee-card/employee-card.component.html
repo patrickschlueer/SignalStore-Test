@@ -1,8 +1,9 @@
 <mat-card class="employee-card">
-  <div class="card-header">
-    <span class="employee-name">{{ employee().lastName }}, {{ employee().firstName }}</span>
-  </div>
+
   
+  <mat-card-header class="!p-3">
+    <mat-card-title>{{ employee().lastName }}, {{ employee().firstName }}</mat-card-title>
+  </mat-card-header>
   <mat-card-content>
     <!-- Avatar / Foto -->
     <div class="employee-photo">

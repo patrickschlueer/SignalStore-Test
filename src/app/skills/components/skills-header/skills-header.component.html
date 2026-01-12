@@ -1,0 +1,50 @@
+<!-- Einzelne KPI Card mit allen 4 Kennzahlen -->
+<mat-card class="mb-6">
+  <mat-card-content class="!flex items-center justify-around py-4 px-6">
+    
+    <!-- Mitarbeiter -->
+    <div class="flex items-center gap-3">
+      <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
+        <span class="material-symbols-outlined text-5xl text-red-600">group</span>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-red-600">{{ stats().totalEmployees }}</div>
+        <div class="text-sm text-gray-600">Mitarbeiter</div>
+      </div>
+    </div>
+
+    <!-- Unique Skills -->
+    <div class="flex items-center gap-3">
+      <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
+        <span class="material-symbols-outlined text-5xl text-red-600">school</span>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-red-600">{{ stats().uniqueSkills }}</div>
+        <div class="text-sm text-gray-600">Unique Skills</div>
+      </div>
+    </div>
+
+    <!-- Ø Skills/Person -->
+    <div class="flex items-center gap-3">
+      <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
+        <span class="material-symbols-outlined text-5xl text-red-600">trending_up</span>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-red-600">{{ stats().avgSkillsPerEmployee }}</div>
+        <div class="text-sm text-gray-600">Ø Skills/Person</div>
+      </div>
+    </div>
+
+    <!-- Expert Level -->
+    <div class="flex items-center gap-3">
+      <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
+        <span class="material-symbols-outlined text-5xl text-red-600">star</span>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-red-600">{{ stats().expertSkillCount }}</div>
+        <div class="text-sm text-gray-600">Expert Level</div>
+      </div>
+    </div>
+
+  </mat-card-content>
+</mat-card>

@@ -106,3 +106,8 @@ app-toolbar {
     background-color: var(--mat-sys-primary);
     color: var(--mat-sys-on-primary);
 }
+
+.avatar-content {
+  min-height: 100%;
+  object-fit: cover;
+}

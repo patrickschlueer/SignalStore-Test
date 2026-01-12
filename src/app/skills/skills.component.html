@@ -1,0 +1,21 @@
+<div class="p-6">
+  <!-- KPI Cards -->
+  <app-skills-header [employees]="employees()" />
+
+  <!-- Filter -->
+  <app-skills-filter />
+
+  <!-- Employee Cards Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    @for (employee of employees(); track employee.id) {
+      <app-skills-card [employee]="employee" />
+    }
+    
+    @empty {
+      <div class="col-span-full text-center py-12 text-gray-500">
+        <span class="material-symbols-outlined text-6xl mb-4">person_search</span>
+        <p>Keine Mitarbeiter gefunden</p>
+      </div>
+    }
+  </div>
+</div>
