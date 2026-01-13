@@ -11,7 +11,6 @@ export interface ContextMenuPosition {
 
 @Component({
   selector: 'app-calendar-context-menu',
-  standalone: true,
   imports: [
     CommonModule,
     MatIconModule

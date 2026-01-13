@@ -7,7 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-employee-card',
-  standalone: true,
   imports: [
     MatCardModule,
     MatButtonModule,

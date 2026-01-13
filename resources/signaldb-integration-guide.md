@@ -353,7 +353,6 @@ import { Birthday } from '../../shared/models/entities/birthday.interface';
 
 @Component({
   selector: 'app-birthday-list',
-  standalone: true,
   template: `
     <div>
       <h2>Upcoming Birthdays ({{ totalCount() }})</h2>

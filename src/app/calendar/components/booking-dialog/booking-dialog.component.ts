@@ -21,7 +21,6 @@ import { getWeekNumber, formatDateRange } from '../../../shared/helper/date-help
 
 @Component({
   selector: 'app-booking-dialog',
-  standalone: true,
   imports: [
     CommonModule,
     MatDialogModule,

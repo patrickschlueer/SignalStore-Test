@@ -22,7 +22,6 @@ function parseCellKey(key: string): { employeeId: string; dateStr: string } {
 
 @Component({
   selector: 'app-calendar-fab-buttons',
-  standalone: true,
   imports: [
     CommonModule,
     MatButtonModule,

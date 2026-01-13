@@ -227,7 +227,6 @@ import { Entity } from '../../shared/models/entities/{entity}.model';
 
 @Component({
   selector: 'app-entity-list',
-  standalone: true,
   template: `
     <div>
       @for (entity of entities(); track entity.id) {

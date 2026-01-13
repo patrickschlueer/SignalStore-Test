@@ -8,7 +8,6 @@ import { Employee } from '../../../shared/models/entities/employee.interface';
 
 @Component({
   selector: 'app-skills-card',
-  standalone: true,
   imports: [
     MatCardModule, 
     MatButtonModule, 

@@ -5,7 +5,6 @@ import { CalendarFabButtonsComponent } from './components/calendar-fab-buttons/c
 
 @Component({
   selector: 'app-calendar',
-  standalone: true,
   imports: [
     CalendarToolbarComponent,
     CalendarGridComponent,

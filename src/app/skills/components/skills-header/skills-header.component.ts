@@ -5,7 +5,6 @@ import { Employee } from '../../../shared/models/entities/employee.interface';
 
 @Component({
   selector: 'app-skills-header',
-  standalone: true,
   imports: [MatCardModule, MatIconModule],
   templateUrl: './skills-header.component.html',
   styleUrl: './skills-header.component.scss'

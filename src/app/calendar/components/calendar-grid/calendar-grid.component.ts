@@ -11,7 +11,6 @@ import { BookingType } from '../../../shared/types/booking.type';
 
 @Component({
   selector: 'app-calendar-grid',
-  standalone: true,
   imports: [
     CommonModule,
     MatTooltipModule,

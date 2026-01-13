@@ -9,7 +9,6 @@ import { MatIcon } from "@angular/material/icon";
 
 @Component({
   selector: 'app-skills-filter',
-  standalone: true,
   imports: [
     FormsModule,
     MatFormFieldModule,

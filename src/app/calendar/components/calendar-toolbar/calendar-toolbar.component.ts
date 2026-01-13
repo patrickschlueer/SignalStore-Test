@@ -8,7 +8,6 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-calendar-toolbar',
-  standalone: true,
   imports: [
     CommonModule,
     MatButtonModule,
@@ -20,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './calendar-toolbar.component.scss'
 })
 export class CalendarToolbarComponent {
-  
+
   @HostListener('window:keydown', ['$event'])
   handleArrowKeys(event: KeyboardEvent) {
     console.log(event.key);

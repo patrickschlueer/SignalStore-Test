@@ -5,7 +5,6 @@ import { EmployeeCardComponent } from './employee-card/employee-card.component';
 
 @Component({
   selector: 'app-employee',
-  standalone: true,
   imports: [
     EmployeeCardComponent
   ],
