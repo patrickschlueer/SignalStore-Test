@@ -138,14 +138,17 @@
       border-left: 2px solid #c51525;
     }
     
-    &:hover:not(.disabled) {
+    &:hover:not(.disabled):not(.selected) {
       background: rgba(197, 21, 37, 0.05);
       transform: scale(1.02);
     }
     
     &.selected {
-      background: rgba(197, 21, 37, 0.12);
-      border: 2px solid #c51525;
+      background: rgba(197, 21, 37, 0.5);
+      // border: 2px solid #c51525;
+      &:hover {
+        background: rgba(197, 21, 37, 0.7);
+      }
     }
     
     &.has-booking {

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -41,6 +41,16 @@ export class CalendarToolbarComponent {
   readonly currentYear = new Date().getFullYear();
   readonly years = Array.from({ length: 5 }, (_, i) => this.currentYear - 2 + i);
   
+  @HostListener('window:keydown', ['$event'])
+  handleKey(event: KeyboardEvent) {
+    if (event.key === 'ArrowLeft') {
+      this.onPreviousMonth();
+    }
+    if (event.key === 'ArrowRight') {
+      this.onNextMonth();
+    }
+  }
+
   onPreviousMonth(): void {
     this.calendarStore.previousMonth();
   }
