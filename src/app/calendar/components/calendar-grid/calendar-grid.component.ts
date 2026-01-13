@@ -23,38 +23,18 @@ export class CalendarGridComponent {
   readonly employeeStore = inject(EmployeeStore);
   
   readonly days = this.calendarStore.daysInMonth;
+  readonly weeks = this.calendarStore.weeksInMonth;
   readonly employees = this.employeeStore.sortedEmployees;
+  readonly booking = this.calendarStore.bookings;
   readonly viewMode = this.calendarStore.viewMode;
-  
-  // Group days by week for week number display
-  readonly weeks = computed(() => {
-    const days = this.days();
-    const weeks: CalendarDay[][] = [];
-    let currentWeek: CalendarDay[] = [];
-    let lastWeekNumber = -1;
-    
-    days.forEach(day => {
-      if (day.weekNumber !== lastWeekNumber && currentWeek.length > 0) {
-        weeks.push(currentWeek);
-        currentWeek = [];
-      }
-      currentWeek.push(day);
-      lastWeekNumber = day.weekNumber;
-    });
-    
-    if (currentWeek.length > 0) {
-      weeks.push(currentWeek);
-    }
-    
-    return weeks;
-  });
-  
+
   getDayLabel(day: CalendarDay): string {
     const dayNames = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
     return `${dayNames[day.dayOfWeek]} ${day.dayOfMonth}`;
   }
   
   onCellClick(employee: Employee, day: CalendarDay, event: MouseEvent): void {
+    console.log(this.booking);
     // Skip if weekend or holiday
     if (day.isWeekend || day.isHoliday) return;
     
@@ -81,6 +61,8 @@ export class CalendarGridComponent {
     }
     
     const booking = this.calendarStore.getBookingForDay(employee.id, day.date);
+    console.log('booking:');
+    console.log(booking);
     if (booking) {
       classes.push('has-booking', `booking-${booking.type}`);
     }

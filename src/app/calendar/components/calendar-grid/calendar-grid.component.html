@@ -15,15 +15,12 @@
           <!-- Days in Week -->
           <div class="days-row">
             @for (day of week; track day.date) {
-              <div 
-                class="day-header"
-                [class.weekend]="day.isWeekend"
-                [class.holiday]="day.isHoliday"
-                [class.today]="day.isToday">
-                <span class="day-label">{{ getDayLabel(day) }}</span>
+              <div [class]="day.className">
+                <span class="day-label">{{ day.label }}</span>
               </div>
             }
           </div>
+
         </div>
       }
     </div>
