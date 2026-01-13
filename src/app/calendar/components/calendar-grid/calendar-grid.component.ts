@@ -5,13 +5,15 @@ import { CalendarStore } from '../../../shared/stores/calendar/calendar.store';
 import { EmployeeStore } from '../../../shared/stores/employee/employee.store';
 import { CalendarDay } from '../../../shared/models/helper/calendar-day.interface';
 import { Employee } from '../../../shared/models/entities/employee.interface';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-calendar-grid',
   standalone: true,
   imports: [
     CommonModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatIconModule
   ],
   templateUrl: './calendar-grid.component.html',
   styleUrl: './calendar-grid.component.scss'

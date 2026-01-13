@@ -4,8 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { CalendarStore } from '../../../shared/stores/calendar/calendar.store';
-import { calendarEvents } from '../../../shared/stores/calendar/events/calendar.events';
-import { injectDispatch } from '@ngrx/signals/events';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-calendar-toolbar',
@@ -14,7 +13,8 @@ import { injectDispatch } from '@ngrx/signals/events';
     CommonModule,
     MatButtonModule,
     MatMenuModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatIconModule
   ],
   templateUrl: './calendar-toolbar.component.html',
   styleUrl: './calendar-toolbar.component.scss'

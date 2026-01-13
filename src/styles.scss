@@ -1,8 +1,12 @@
 // Angular Material & Theme
 @use '@angular/material' as mat;
 @use './assets/theme-colors' as point-theme-colors;
-// Tailwind CSS integration
-@use "tailwindcss";
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+/* KEIN preflight import */
+@import "tailwindcss/utilities.css" layer(utilities);
+
 
 // Include Material core styles (only once in your app)
 @include mat.core();
@@ -115,3 +119,11 @@ app-toolbar {
 .mat-mdc-form-field-icon-prefix {
   margin-left: 6px;
 }
+
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    box-sizing: border-box; /* 1 */
+  }

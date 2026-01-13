@@ -49,12 +49,12 @@
                 @if (getBookingIcon(employee, day); as icon) {
                   <!-- Modern Mode: Large Icon -->
                   @if (viewMode() === 'modern') {
-                    <span class="material-symbols-outlined booking-icon">{{ icon }}</span>
+                    <mat-icon class="booking-icon">{{ icon }}</mat-icon>
                   }
                   
                   <!-- Compact Mode: Small Icon -->
                   @if (viewMode() === 'compact') {
-                    <span class="material-symbols-outlined booking-icon-small">{{ icon }}</span>
+                    <mat-icon class="booking-icon-small">{{ icon }}</mat-icon>
                   }
                 }
               </div>

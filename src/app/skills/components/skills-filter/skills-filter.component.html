@@ -1,7 +1,7 @@
 <div class="mb-6 flex items-center gap-4">
   <!-- Suchleiste (50% Breite) -->
   <mat-form-field class="flex-1 max-w-[50%]" appearance="outline">
-    <span class="material-symbols-outlined" matPrefix>search</span>
+    <mat-icon matPrefix>search</mat-icon>
     <input 
       matInput 
       placeholder="Suche nach Person oder Skill..."
@@ -19,7 +19,7 @@
         [selected]="selectedFilter() === filter"
         (click)="setFilter(filter)">
         @if (filter.filterIcon) {
-          <span class="material-symbols-outlined" matChipAvatar>{{filter.filterIcon}}</span>
+          <mat-icon matChipAvatar>{{filter.filterIcon}}</mat-icon>
         }
         {{filter.filterType}}
       </mat-chip-option>

@@ -4,7 +4,7 @@
     <!-- Month/Year Picker -->
     <button mat-button [matMenuTriggerFor]="monthMenu" class="month-picker">
       <span class="month-name">{{ calendarStore.monthName() }}</span>
-      <span class="material-symbols-outlined">expand_more</span>
+      <mat-icon>expand_more</mat-icon>
     </button>
     
     <mat-menu #monthMenu="matMenu" class="month-menu">
@@ -26,13 +26,13 @@
     </mat-menu>
     
     <!-- Previous Month -->
-    <button mat-icon-button (click)="onPreviousMonth()" class="nav-button">
-      <span class="material-symbols-outlined">chevron_left</span>
+    <button mat-icon-button (click)="onPreviousMonth()">
+      <mat-icon>chevron_left</mat-icon>
     </button>
     
     <!-- Next Month -->
-    <button mat-icon-button (click)="onNextMonth()" class="nav-button">
-      <span class="material-symbols-outlined">chevron_right</span>
+    <button mat-icon-button (click)="onNextMonth()">
+      <mat-icon>chevron_right</mat-icon>
     </button>
   </div>
   
@@ -43,11 +43,11 @@
       (change)="onViewModeChange()"
       class="view-toggle">
       <mat-button-toggle value="modern">
-        <span class="material-symbols-outlined">view_comfy</span>
+        <mat-icon>view_comfy</mat-icon>
         <span class="toggle-label">Modern</span>
       </mat-button-toggle>
       <mat-button-toggle value="compact">
-        <span class="material-symbols-outlined">view_compact</span>
+        <mat-icon>view_compact</mat-icon>
         <span class="toggle-label">Kompakt</span>
       </mat-button-toggle>
     </mat-button-toggle-group>

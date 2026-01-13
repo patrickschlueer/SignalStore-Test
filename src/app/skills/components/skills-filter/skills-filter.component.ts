@@ -5,6 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
 import { EmployeeStore } from '../../../shared/stores/employee/employee.store';
 import { SkillFilter } from '../../../shared/models/helper/skill-filter.interface';
+import { MatIcon } from "@angular/material/icon";
 
 @Component({
   selector: 'app-skills-filter',
@@ -13,8 +14,9 @@ import { SkillFilter } from '../../../shared/models/helper/skill-filter.interfac
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatChipsModule
-  ],
+    MatChipsModule,
+    MatIcon
+],
   templateUrl: './skills-filter.component.html',
   styleUrl: './skills-filter.component.scss'
 })

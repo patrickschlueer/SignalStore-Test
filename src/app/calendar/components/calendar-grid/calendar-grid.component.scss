@@ -65,12 +65,17 @@
       
       &.today {
         border: 2px solid #c51525;
-        border-bottom: 2px solid #c51525;
+        border-bottom: none;
         color: #c51525;
         font-weight: 600;
+        
+        &:last-child {
+          border-bottom: 2px solid #c51525;
+        }
       }
     }
   }
+  
   
   // ===================================
   // BODY (Employee Rows)

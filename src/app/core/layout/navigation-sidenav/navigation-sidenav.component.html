@@ -10,7 +10,7 @@
     @for (nav of navigationStore.navigationEntities(); track nav.id) {
       @if (nav.visible) {
         <a mat-list-item [routerLink]="nav.route" routerLinkActive="active-nav-item">
-          <span class="material-symbols-outlined" matListItemIcon>{{ nav.icon }}</span>
+          <mat-icon fontSet="symbols" matListItemIcon>{{ nav.icon }}</mat-icon>
           <span matListItemTitle>{{ nav.label }}</span>
         </a>
       }

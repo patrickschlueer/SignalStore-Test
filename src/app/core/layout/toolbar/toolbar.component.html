@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="flex items-center gap-2">
   <button mat-icon-button (click)="layoutDispatcher.navigationSidenavToggled()">
-    <span class="material-symbols-outlined">menu</span>
+    <mat-icon>menu</mat-icon>
   </button>
   
   @if (!userStore.isLoading()) {
@@ -14,9 +14,9 @@
   
   <button mat-icon-button (click)="layoutDispatcher.darkModeToggled()" matTooltip="Dark Mode umschalten">
     @if (layoutStore.darkMode()) {
-      <span class="material-symbols-outlined">light_mode</span>
+      <mat-icon>light_mode</mat-icon>
     } @else {
-      <span class="material-symbols-outlined">dark_mode</span>
+      <mat-icon>dark_mode</mat-icon>
     }
   </button>
   
