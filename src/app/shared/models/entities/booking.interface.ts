@@ -7,4 +7,5 @@ export interface Booking {
   endDate: Date;
   type: BookingType;
   note?: string;
+  customerId?: string; // Nur für type: 'projekt'
 }

@@ -1,0 +1,25 @@
+@if (visible()) {
+  <!-- Backdrop -->
+  <div class="context-menu-backdrop" (click)="onBackdropClick()"></div>
+  
+  <!-- Context Menu -->
+  <div 
+    class="context-menu"
+    [style.left.px]="position().x"
+    [style.top.px]="position().y">
+    <div class="context-menu-header">
+      Schnellaktionen
+    </div>
+    
+    <div class="context-menu-items">
+      @for (bookingType of bookingTypes; track bookingType.type) {
+        <button 
+          class="context-menu-item"
+          (click)="onBookingTypeClick(bookingType.type, $event)">
+          <mat-icon class="context-menu-icon">{{ bookingType.icon }}</mat-icon>
+          <span class="context-menu-label">{{ bookingType.label }}</span>
+        </button>
+      }
+    </div>
+  </div>
+}

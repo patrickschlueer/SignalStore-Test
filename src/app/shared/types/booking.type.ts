@@ -1,1 +1,9 @@
-export type BookingType = 'home-office' | 'vacation' | 'sick' | 'event';
+export type BookingType = 
+  | 'education'
+  | 'sick'
+  | 'project'
+  | 'flexday'
+  | 'vacation'
+  | 'event'
+  | 'home-office'
+  | 'planned-vacation';

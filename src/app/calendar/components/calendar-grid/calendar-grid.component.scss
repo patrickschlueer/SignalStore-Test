@@ -1,6 +1,19 @@
 .calendar-wrapper {
   overflow-x: auto;
-  height: calc(100vh - 120px);
+  min-height: calc(100vh - 187px);
+  max-height: calc(100vh - 187px);
+  
+  // Prevent text selection while dragging
+  &.dragging {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    
+    .calendar-cell {
+      cursor: crosshair;
+    }
+  }
   
   .calendar-grid {
     min-width: max-content;
@@ -145,7 +158,7 @@
     
     &.selected {
       background: rgba(197, 21, 37, 0.5);
-      // border: 2px solid #c51525;
+      
       &:hover {
         background: rgba(197, 21, 37, 0.7);
       }

@@ -1,4 +1,6 @@
-<div class="calendar-wrapper" [class.compact-mode]="viewMode() === 'compact'">
+<div class="calendar-wrapper" 
+     [class.compact-mode]="viewMode() === 'compact'"
+     [class.dragging]="calendarStore.isDragging()">
   <!-- Calendar Grid -->
   <div class="calendar-grid">
     <!-- Header Row with Week Numbers and Days -->
@@ -40,6 +42,9 @@
               <div 
                 [class]="getCellClass(employee, day)"
                 (click)="onCellClick(employee, day, $event)"
+                (contextmenu)="onCellRightClick(employee, day, $event)"
+                (mousedown)="onCellMouseDown(employee, day, $event)"
+                (mouseenter)="onCellMouseEnter(employee, day, $event)"
                 [matTooltip]="getBookingLabel(employee, day) || ''"
                 [matTooltipDisabled]="!getBookingLabel(employee, day)">
                 
@@ -61,4 +66,12 @@
       }
     </div>
   </div>
+  
+  <!-- Context Menu -->
+  <app-calendar-context-menu
+    [visible]="contextMenuVisible()"
+    [position]="contextMenuPosition()"
+    (bookingTypeSelected)="onContextMenuBookingTypeSelected($event)"
+    (closeMenu)="closeContextMenu()"
+  />
 </div>

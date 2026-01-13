@@ -1,7 +1,9 @@
 .calendar-container {
-  height: 100vh;
+  height: calc(100vh - 112px);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   background: #f5f5f5;
+  max-height: calc(100vh - 112px);
+  border: 1px solid gray;
 }

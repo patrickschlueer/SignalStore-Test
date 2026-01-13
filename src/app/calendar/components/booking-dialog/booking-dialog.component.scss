@@ -1,0 +1,310 @@
+.booking-dialog {
+  display: flex;
+  flex-direction: column;
+  min-width: 500px;
+  max-width: 600px;
+  
+  // ===================================
+  // HEADER
+  // ===================================
+  
+  .dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      
+      .header-icon {
+        color: #c51525;
+        font-size: 28px;
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+      }
+    }
+    
+    .close-button {
+      margin-bottom: -4px;
+    }
+  }
+  
+  // ===================================
+  // CONTENT
+  // ===================================
+  
+  .dialog-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .section-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 0.75rem;
+  }
+
+  h2 {
+    padding: 0px;
+    margin-top: -12px;
+  }
+  
+  .subsection-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+  
+  // ===================================
+  // EMPLOYEE INFO
+  // ===================================
+  
+  .employee-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: #f5f5f5;
+    border-radius: 8px;
+    
+    .employee-icon {
+      color: #c51525;
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+    
+    .employee-name {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+  }
+  
+  // ===================================
+  // DATE RANGES
+  // ===================================
+  
+  .date-ranges {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .date-range-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(197, 21, 37, 0.08);
+    border-radius: 20px;
+    border: 1px solid rgba(197, 21, 37, 0.2);
+    width: fit-content;
+    
+    .chip-icon {
+      color: #c51525;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+    
+    .chip-text {
+      font-size: 0.875rem;
+      color: #333;
+    }
+    
+    .chip-count {
+      color: #666;
+      font-weight: 500;
+    }
+  }
+  
+  // ===================================
+  // BOOKING TYPE (Dropdown)
+  // ===================================
+  
+  .booking-type-section {
+    .booking-type-field {
+      width: 100%;
+    }
+  }
+  
+  .booking-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    
+    .option-icon {
+      color: #c51525;
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+    
+    .option-label {
+      font-size: 0.875rem;
+    }
+  }
+  
+  // ===================================
+  // CUSTOMER SELECTION
+  // ===================================
+  
+  .customer-section {
+    animation: slideDown 0.2s ease;
+    
+    .customer-field {
+      width: 100%;
+    }
+  }
+  
+  // ===================================
+  // RECURRING SECTION
+  // ===================================
+  
+  .recurring-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .recurring-checkbox {
+    ::ng-deep .mdc-checkbox__background {
+      border-color: #c51525 !important;
+    }
+    
+    ::ng-deep .mdc-checkbox--selected .mdc-checkbox__background {
+      background-color: #c51525 !important;
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+  
+  .recurring-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 8px;
+    animation: slideDown 0.2s ease;
+  }
+  
+  .weekday-display {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .weekday-chips {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .weekday-chip {
+    min-width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #e0e0e0;
+    border-radius: 50%;
+    background: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #999;
+    
+    &.active {
+      border-color: #c51525;
+      background: #c51525;
+      color: white;
+    }
+  }
+  
+  .until-date {
+    .until-field {
+      width: 100%;
+    }
+  }
+  
+  // ===================================
+  // NOTE SECTION
+  // ===================================
+  
+  .note-section {
+    .note-field {
+      width: 100%;
+    }
+  }
+  
+  // ===================================
+  // ACTIONS
+  // ===================================
+  
+  .dialog-actions {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    
+    .confirm-button {
+      background-color: #c51525;
+      
+      &:hover:not(:disabled) {
+        background-color: #a01119;
+      }
+      
+      mat-icon {
+        margin-right: 0.25rem;
+      }
+    }
+  }
+}
+
+// ===================================
+// ANIMATIONS
+// ===================================
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ===================================
+// MOBILE RESPONSIVE
+// ===================================
+
+@media (max-width: 768px) {
+  .booking-dialog {
+    min-width: 100%;
+    max-width: 100%;
+    
+    .weekday-chips {
+      justify-content: space-between;
+      
+      .weekday-chip {
+        flex: 1;
+        min-width: 36px;
+        height: 36px;
+      }
+    }
+  }
+}

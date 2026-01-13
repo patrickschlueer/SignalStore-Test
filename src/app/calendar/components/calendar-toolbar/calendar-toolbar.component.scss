@@ -54,12 +54,15 @@
 }
 
 ::ng-deep .month-menu {
+  max-width: none !important;
+  
   .mat-mdc-menu-content {
     padding: 0;
+    overflow-x: hidden !important;
   }
   
   .year-group {
-    padding: 1rem;
+    padding: 0.75rem 1rem;
     border-bottom: 1px solid #e0e0e0;
     
     &:last-child {
@@ -76,13 +79,15 @@
   
   .months-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr); // 4 Spalten statt 3
     gap: 0.25rem;
   }
   
   .month-item {
     font-size: 0.875rem;
     min-height: 36px;
+    padding: 0 12px;
+    white-space: nowrap;
     
     &:hover {
       background: rgba(197, 21, 37, 0.08);
@@ -97,6 +102,17 @@
     
     .toggle-label {
       display: none;
+    }
+  }
+  
+  ::ng-deep .month-menu {
+    .months-grid {
+      grid-template-columns: repeat(3, 1fr); // Mobile: 3 Spalten
+    }
+    
+    .month-item {
+      font-size: 0.75rem;
+      padding: 0 8px;
     }
   }
 }

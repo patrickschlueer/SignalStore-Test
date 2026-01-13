@@ -1,0 +1,142 @@
+<div class="booking-dialog">
+  <!-- Header -->
+  <div class="dialog-header">
+    <div class="header-content">
+      <mat-icon class="header-icon">event</mat-icon>
+      <h2 mat-dialog-title>Neue Buchung</h2>
+    </div>
+    <button mat-icon-button mat-dialog-close class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  
+  <!-- Content -->
+  <mat-dialog-content class="dialog-content">
+    
+    <!-- Selected Date Ranges -->
+    <div class="date-ranges">
+      <div class="section-label">Ausgewählte Tage</div>
+      @for (range of data.dateRanges; track $index) {
+        <div class="date-range-chip">
+          <mat-icon class="chip-icon">calendar_today</mat-icon>
+          <span class="chip-text">
+            {{ formatDateRange(range.startDate, range.endDate) }}
+            <span class="chip-count">({{ getDayCountLabel(range.dayCount) }})</span>
+          </span>
+        </div>
+      }
+    </div>
+    
+    <!-- Booking Type Selection (Dropdown) -->
+    <div class="booking-type-section">
+      <mat-form-field appearance="outline" class="booking-type-field">
+        <mat-label>Buchungsart</mat-label>
+        <mat-select 
+          [(ngModel)]="selectedBookingType" 
+          (ngModelChange)="onBookingTypeChange($event)"
+          required>
+          @for (type of bookingTypes; track type.type) {
+            <mat-option [value]="type.type">
+              <div class="booking-option">
+                <mat-icon class="option-icon">{{ type.icon }}</mat-icon>
+                <span class="option-label">{{ type.label }}</span>
+              </div>
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+    
+    <!-- Customer Selection (nur für Projekte) -->
+    @if (showCustomerSelection()) {
+      <div class="customer-section">
+        <mat-form-field appearance="outline" class="customer-field">
+          <mat-label>Kunde</mat-label>
+          <mat-select [(ngModel)]="selectedCustomerId" required>
+            @for (customer of customers; track customer.id) {
+              <mat-option [value]="customer.id">
+                {{ customer.name }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+    }
+    
+    <!-- Recurring Section -->
+    <div class="recurring-section">
+      <mat-checkbox 
+        [(ngModel)]="isRecurring"
+        [disabled]="!canBeRecurring()"
+        [matTooltip]="!canBeRecurring() ? 'Wiederkehrend nur möglich bei einem Zeitraum innerhalb einer Woche' : ''"
+        class="recurring-checkbox">
+        Wiederkehrend
+      </mat-checkbox>
+      
+      @if (isRecurring() && canBeRecurring()) {
+        <div class="recurring-options">
+          <!-- Weekday Display (readonly) -->
+          <div class="weekday-display">
+            <div class="subsection-label">Wochentage (aus Auswahl)</div>
+            <div class="weekday-chips">
+              @for (day of weekdays; track day.value) {
+                <div
+                  class="weekday-chip"
+                  [class.active]="isWeekdayInRange(day.value)"
+                  [matTooltip]="day.name">
+                  {{ day.label }}
+                </div>
+              }
+            </div>
+          </div>
+          
+          <!-- Until Date -->
+          <div class="until-date">
+            <mat-form-field appearance="outline" class="until-field">
+              <mat-label>Wiederholen bis</mat-label>
+              <input 
+                matInput 
+                [matDatepicker]="untilPicker"
+                [(ngModel)]="recurringUntil"
+                [min]="minRecurringDate"
+                readonly>
+              <mat-datepicker-toggle matSuffix [for]="untilPicker"></mat-datepicker-toggle>
+              <mat-datepicker #untilPicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      }
+    </div>
+    
+    <!-- Note -->
+    <div class="note-section">
+      <mat-form-field appearance="outline" class="note-field">
+        <mat-label>Notiz (optional)</mat-label>
+        <textarea 
+          matInput 
+          [(ngModel)]="note"
+          [maxlength]="maxNoteLength"
+          rows="3"
+          placeholder="Grund, Details, etc.">
+        </textarea>
+        <mat-hint align="end">{{ note().length }}/{{ maxNoteLength }}</mat-hint>
+      </mat-form-field>
+    </div>
+    
+  </mat-dialog-content>
+  
+  <!-- Actions -->
+  <mat-dialog-actions class="dialog-actions">
+    <button mat-button (click)="onCancel()" class="cancel-button">
+      Abbrechen
+    </button>
+    <button 
+      mat-button 
+      color="primary"
+      [disabled]="!canConfirm()"
+      (click)="onConfirm()">
+      <mat-icon>check</mat-icon>
+      Eintragen
+    </button>
+  </mat-dialog-actions>
+</div>

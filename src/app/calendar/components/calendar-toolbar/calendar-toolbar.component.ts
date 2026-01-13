@@ -39,17 +39,7 @@ export class CalendarToolbarComponent {
   ];
   
   readonly currentYear = new Date().getFullYear();
-  readonly years = Array.from({ length: 5 }, (_, i) => this.currentYear - 2 + i);
-  
-  @HostListener('window:keydown', ['$event'])
-  handleKey(event: KeyboardEvent) {
-    if (event.key === 'ArrowLeft') {
-      this.onPreviousMonth();
-    }
-    if (event.key === 'ArrowRight') {
-      this.onNextMonth();
-    }
-  }
+  readonly years = Array.from({ length: 3 }, (_, i) => this.currentYear - 1 + i);
 
   onPreviousMonth(): void {
     this.calendarStore.previousMonth();
