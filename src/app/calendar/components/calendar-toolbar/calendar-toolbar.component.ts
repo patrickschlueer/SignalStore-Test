@@ -57,3 +57,8 @@ export class CalendarToolbarComponent {
     this.calendarStore.toggleViewMode();
   }
 }
+
+
+// TODO:
+// Bug wenn man wiederkehrende Buchungen erstellt dann werden die initial ausgewählten Tage nicht mit gebucht
+// Wenn man über die Schnellaktion ein Projekt buchen will, dann geht das ohne Kunde. Hier muss ein Kunde ausgewählt werden.
