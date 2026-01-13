@@ -22,6 +22,14 @@ import { BookingType } from '../../../shared/types/booking.type';
   styleUrl: './calendar-grid.component.scss'
 })
 export class CalendarGridComponent {
+
+  @HostListener('document:mouseup')
+  onDocumentMouseUp(): void {
+    if (this.calendarStore.isDragging()) {
+      this.calendarStore.endDrag();
+    }
+  }
+
   readonly calendarStore = inject(CalendarStore);
   readonly employeeStore = inject(EmployeeStore);
   
@@ -160,13 +168,6 @@ export class CalendarGridComponent {
     this.dragMoved = true;
     
     this.calendarStore.dragOver(employee.id, day.date);
-  }
-  
-  @HostListener('document:mouseup')
-  onDocumentMouseUp(): void {
-    if (this.calendarStore.isDragging()) {
-      this.calendarStore.endDrag();
-    }
   }
   
   getCellClass(employee: Employee, day: CalendarDay): string[] {

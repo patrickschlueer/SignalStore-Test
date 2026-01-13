@@ -17,6 +17,7 @@ import { BookingDialogData, BookingDialogResult } from './booking-dialog-data.in
 import { BookingType } from '../../../shared/types/booking.type';
 import { BOOKING_TYPE_CONFIGS } from '../../../shared/mocks/booking-type-config.mock';
 import { MOCK_CUSTOMERS } from '../../../shared/mocks/customer.mock';
+import { getWeekNumber, formatDateRange } from '../../../shared/helper/date-helper';
 
 @Component({
   selector: 'app-booking-dialog',
@@ -91,8 +92,8 @@ export class BookingDialogComponent {
     if (this.data.dateRanges.length !== 1) return false;
     
     const range = this.data.dateRanges[0];
-    const startWeek = this.getWeekNumber(range.startDate);
-    const endWeek = this.getWeekNumber(range.endDate);
+    const startWeek = getWeekNumber(range.startDate);
+    const endWeek = getWeekNumber(range.endDate);
     
     // Start und Ende müssen in derselben Woche sein
     return startWeek === endWeek;
@@ -158,17 +159,7 @@ export class BookingDialogComponent {
     return hasBookingType;
   }
   
-  formatDateRange(startDate: Date, endDate: Date): string {
-    const start = startDate.toLocaleDateString('de-DE', { day: '2-digit', month: 'short' });
-    const end = endDate.toLocaleDateString('de-DE', { day: '2-digit', month: 'short' });
-    
-    if (start === end) {
-      return start;
-    }
-    
-    return `${start} - ${end}`;
-  }
-  
+
   getDayCountLabel(count: number): string {
     return count === 1 ? '1 Tag' : `${count} Tage`;
   }
@@ -177,11 +168,8 @@ export class BookingDialogComponent {
     return this.bookingTypes.find(bt => bt.type === type)?.icon || 'calendar_today';
   }
   
-  private getWeekNumber(date: Date): number {
-    const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-    const dayNum = d.getUTCDay() || 7;
-    d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-    const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-    return Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1) / 7);
+  formatDateRange(startDate: Date, endDate: Date): string {
+    return formatDateRange(startDate, endDate);
   }
+
 }

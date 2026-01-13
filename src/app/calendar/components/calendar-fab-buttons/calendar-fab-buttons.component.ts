@@ -12,8 +12,12 @@ import { BookingDialogData } from '../booking-dialog/booking-dialog-data.interfa
 const CELL_KEY_SEPARATOR = '|||';
 
 function parseCellKey(key: string): { employeeId: string; dateStr: string } {
-  const [employeeId, dateStr] = key.split(CELL_KEY_SEPARATOR);
-  return { employeeId, dateStr };
+  if (key) {
+    const [employeeId, dateStr] = key.split(CELL_KEY_SEPARATOR);
+    return { employeeId, dateStr };
+  } else {
+    return { employeeId: '', dateStr: '' };
+  }
 }
 
 @Component({
@@ -30,11 +34,13 @@ function parseCellKey(key: string): { employeeId: string; dateStr: string } {
 })
 export class CalendarFabButtonsComponent {
 
-      
   @HostListener('window:keydown', ['$event'])
   handleEnterKey(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       this.onConfirm();
+    }
+    if (event.key === 'Escape') {
+      this.onCancel();
     }
   }
   

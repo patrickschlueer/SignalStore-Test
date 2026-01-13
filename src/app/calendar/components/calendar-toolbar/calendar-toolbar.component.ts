@@ -20,6 +20,18 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './calendar-toolbar.component.scss'
 })
 export class CalendarToolbarComponent {
+  
+  @HostListener('window:keydown', ['$event'])
+  handleArrowKeys(event: KeyboardEvent) {
+    console.log(event.key);
+    if (event.key === 'ArrowLeft') {
+      this.calendarStore.previousMonth();
+    }
+    if (event.key === 'ArrowRight') {
+      this.calendarStore.nextMonth();
+    }
+  }
+
   readonly calendarStore = inject(CalendarStore);
   
   // Month options for quick navigation

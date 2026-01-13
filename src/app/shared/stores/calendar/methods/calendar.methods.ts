@@ -13,8 +13,12 @@ function createCellKey(employeeId: string, date: Date): string {
 }
 
 function parseCellKey(key: string): { employeeId: string; dateStr: string } {
-  const [employeeId, dateStr] = key.split(CELL_KEY_SEPARATOR);
-  return { employeeId, dateStr };
+  if (key) {
+    const [employeeId, dateStr] = key.split(CELL_KEY_SEPARATOR);
+    return { employeeId, dateStr };
+  } else {
+    return { employeeId: '', dateStr: '' };
+  }
 }
 
 export const createCalendarMethods = (store: any) => ({
