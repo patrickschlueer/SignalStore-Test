@@ -1,0 +1,99 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  
+  .toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .month-picker {
+    font-size: 1.125rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    
+    .month-name {
+      margin-right: 0.25rem;
+    }
+  }
+  
+  .nav-button {
+    &:hover {
+      background: rgba(197, 21, 37, 0.08);
+    }
+  }
+  
+  .view-toggle {
+    .toggle-label {
+      margin-left: 0.5rem;
+    }
+    
+    ::ng-deep .mat-button-toggle-checked {
+      background-color: rgba(197, 21, 37, 0.12);
+      color: #c51525;
+    }
+  }
+}
+
+::ng-deep .month-menu {
+  .mat-mdc-menu-content {
+    padding: 0;
+  }
+  
+  .year-group {
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  
+  .year-label {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+  
+  .months-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.25rem;
+  }
+  
+  .month-item {
+    font-size: 0.875rem;
+    min-height: 36px;
+    
+    &:hover {
+      background: rgba(197, 21, 37, 0.08);
+    }
+  }
+}
+
+// Mobile Responsive
+@media (max-width: 768px) {
+  .toolbar {
+    padding: 0.75rem 1rem;
+    
+    .toggle-label {
+      display: none;
+    }
+  }
+}

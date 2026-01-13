@@ -1,0 +1,229 @@
+.calendar-wrapper {
+  overflow-x: auto;
+  height: calc(100vh - 120px);
+  
+  .calendar-grid {
+    min-width: max-content;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  // ===================================
+  // HEADER
+  // ===================================
+  
+  .calendar-header {
+    display: flex;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 50;
+    border-bottom: 2px solid #c51525;
+    
+    .header-corner {
+      width: 200px;
+      flex-shrink: 0;
+      border-right: 1px solid #e0e0e0;
+    }
+    
+    .week-column {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .week-number {
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #666;
+      background: #f5f5f5;
+      border-right: 1px solid #e0e0e0;
+    }
+    
+    .days-row {
+      display: flex;
+    }
+    
+    .day-header {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-right: 1px solid #e0e0e0;
+      border-bottom: 1px solid #e0e0e0;
+      background: white;
+      
+      &.weekend,
+      &.holiday {
+        background: #FFC107;
+      }
+      
+      &.today {
+        border: 2px solid #c51525;
+        border-bottom: 2px solid #c51525;
+        color: #c51525;
+        font-weight: 600;
+      }
+    }
+  }
+  
+  // ===================================
+  // BODY (Employee Rows)
+  // ===================================
+  
+  .calendar-body {
+    .employee-row {
+      display: flex;
+      background: white;
+      
+      &.even {
+        background: #fafafa;
+      }
+      
+      .employee-name {
+        width: 200px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        border-right: 1px solid #e0e0e0;
+        border-bottom: 1px solid #e0e0e0;
+        position: sticky;
+        left: 0;
+        background: inherit;
+        z-index: 10;
+      }
+      
+      .employee-cells {
+        display: flex;
+        flex: 1;
+      }
+    }
+  }
+  
+  // ===================================
+  // CELLS (Default - Modern Mode)
+  // ===================================
+  
+  .calendar-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    
+    &.disabled {
+      background: #FFC107;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    
+    &.today {
+      border-right: 2px solid #c51525;
+      border-left: 2px solid #c51525;
+    }
+    
+    &:hover:not(.disabled) {
+      background: rgba(197, 21, 37, 0.05);
+      transform: scale(1.02);
+    }
+    
+    &.selected {
+      background: rgba(197, 21, 37, 0.12);
+      border: 2px solid #c51525;
+    }
+    
+    &.has-booking {
+      .booking-icon,
+      .booking-icon-small {
+        color: #c51525;
+      }
+    }
+    
+    .booking-icon {
+      font-size: 28px;
+    }
+    
+    .booking-icon-small {
+      font-size: 28px;
+    }
+  }
+  
+  // ===================================
+  // MODERN MODE (Default)
+  // ===================================
+  
+  &:not(.compact-mode) {
+    .day-header {
+      min-width: 80px;
+      width: 80px;
+    }
+    
+    .calendar-cell {
+      min-width: 80px;
+      width: 80px;
+      height: 60px;
+    }
+  }
+  
+  // ===================================
+  // COMPACT MODE
+  // ===================================
+  
+  &.compact-mode {
+    .day-header {
+      min-width: 48px;
+      width: 48px;
+      font-size: 0.75rem;
+      
+      .day-label {
+        writing-mode: horizontal-tb;
+      }
+    }
+    
+    .calendar-cell {
+      min-width: 48px;
+      width: 48px;
+      height: 40px;
+    }
+    
+    .employee-name {
+      font-size: 0.75rem;
+    }
+    
+    .week-number {
+      height: 24px;
+      font-size: 0.7rem;
+    }
+  }
+}
+
+// ===================================
+// MOBILE RESPONSIVE
+// ===================================
+
+@media (max-width: 768px) {
+  .calendar-wrapper {
+    height: calc(100vh - 100px);
+    
+    .employee-name {
+      width: 150px;
+      font-size: 0.75rem;
+      padding: 0 0.5rem;
+    }
+    
+    .header-corner {
+      width: 150px;
+    }
+  }
+}

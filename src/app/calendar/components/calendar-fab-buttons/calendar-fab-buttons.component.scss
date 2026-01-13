@@ -1,0 +1,83 @@
+.fab-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+  z-index: 1000;
+  
+  .selection-info {
+    background: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-size: 0.875rem;
+    font-weight: 500;
+    animation: slideIn 0.3s ease;
+  }
+  
+  .fab-button {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    animation: scaleIn 0.3s ease;
+    
+    &.fab-confirm {
+      background-color: #c51525;
+      color: white;
+      
+      &:hover {
+        background-color: #a01220;
+      }
+    }
+    
+    &.fab-cancel {
+      background-color: #666;
+      color: white;
+      
+      &:hover {
+        background-color: #555;
+      }
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Mobile
+@media (max-width: 768px) {
+  .fab-container {
+    bottom: 1rem;
+    right: 1rem;
+    
+    .fab-button {
+      width: 48px;
+      height: 48px;
+    }
+    
+    .selection-info {
+      font-size: 0.75rem;
+      padding: 0.5rem 1rem;
+    }
+  }
+}

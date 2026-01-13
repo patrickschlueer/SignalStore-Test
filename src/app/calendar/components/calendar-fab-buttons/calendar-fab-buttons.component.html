@@ -1,0 +1,27 @@
+@if (hasSelection()) {
+  <div class="fab-container">
+    <!-- Selection Info -->
+    <div class="selection-info">
+      {{ selectionCount() }} Tag{{ selectionCount() !== 1 ? 'e' : '' }} ausgewählt
+    </div>
+    
+    <!-- Confirm Button -->
+    <button 
+      mat-fab 
+      color="primary" 
+      class="fab-button fab-confirm"
+      (click)="onConfirm()"
+      aria-label="Buchung bestätigen">
+      <span class="material-symbols-outlined">check</span>
+    </button>
+    
+    <!-- Cancel Button -->
+    <button 
+      mat-fab 
+      class="fab-button fab-cancel"
+      (click)="onCancel()"
+      aria-label="Auswahl abbrechen">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+}

@@ -15,6 +15,7 @@ export function createEmployeeEventHandlers() {
     loadEmployees: events.on(employeeEvents.load).pipe(
       switchMap(() => from(
         (async () => {
+                  console.log('hello world');
           // 1. Sync ausführen (Cache-First)
           await syncManager.sync();
           

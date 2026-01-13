@@ -1,0 +1,67 @@
+<div class="calendar-wrapper" [class.compact-mode]="viewMode() === 'compact'">
+  <!-- Calendar Grid -->
+  <div class="calendar-grid">
+    <!-- Header Row with Week Numbers and Days -->
+    <div class="calendar-header">
+      <!-- Empty corner cell for employee names column -->
+      <div class="header-corner"></div>
+      
+      <!-- Week columns -->
+      @for (week of weeks(); track $index) {
+        <div class="week-column">
+          <!-- Week Number -->
+          <div class="week-number">KW {{ week[0].weekNumber }}</div>
+          
+          <!-- Days in Week -->
+          <div class="days-row">
+            @for (day of week; track day.date) {
+              <div 
+                class="day-header"
+                [class.weekend]="day.isWeekend"
+                [class.holiday]="day.isHoliday"
+                [class.today]="day.isToday">
+                <span class="day-label">{{ getDayLabel(day) }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+    
+    <!-- Employee Rows -->
+    <div class="calendar-body">
+      @for (employee of employees(); track employee.id; let even = $even) {
+        <div class="employee-row" [class.even]="even">
+          <!-- Employee Name -->
+          <div class="employee-name">
+            {{ employee.userName }}
+          </div>
+          
+          <!-- Cells for each day -->
+          <div class="employee-cells">
+            @for (day of days(); track day.date) {
+              <div 
+                [class]="getCellClass(employee, day)"
+                (click)="onCellClick(employee, day, $event)"
+                [matTooltip]="getBookingLabel(employee, day) || ''"
+                [matTooltipDisabled]="!getBookingLabel(employee, day)">
+                
+                @if (getBookingIcon(employee, day); as icon) {
+                  <!-- Modern Mode: Large Icon -->
+                  @if (viewMode() === 'modern') {
+                    <span class="material-symbols-outlined booking-icon">{{ icon }}</span>
+                  }
+                  
+                  <!-- Compact Mode: Small Icon -->
+                  @if (viewMode() === 'compact') {
+                    <span class="material-symbols-outlined booking-icon-small">{{ icon }}</span>
+                  }
+                }
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
